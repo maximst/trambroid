@@ -78,7 +78,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'wnsr5@ltg0pfrwq5t1u$g*ex0x@*8ka*vki34!tq2fz6qqqhj('
+SECRET_KEY = ''
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -151,6 +151,6 @@ LOGGING = {
 }
 
 try:
-    import local_settings
+    from local_settings import *
 except:
     pass
