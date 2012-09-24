@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'taggit',
     'tag',
     'user_profile',
+    'content',
 )
 
 # A sample logging configuration. The only tangible logging

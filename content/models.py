@@ -20,4 +20,4 @@ class Blog(models.Model):
     tags = TaggableManagerN(through=ArticleTaggedItem)
 
     def __unicode__(self):
-	return self.title
+        return u'%s' % self.title

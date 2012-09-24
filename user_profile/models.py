@@ -20,8 +20,8 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         if self.user.get_full_name():
-            return '%s' % (self.user.get_full_name())
+            return u'%s' % (self.user.get_full_name())
         else:
-            return '%s' % self.user.username
+            return u'%s' % self.user.username
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
