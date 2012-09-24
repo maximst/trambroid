@@ -1,13 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
+
+from hvad.models import TranslatableModel, TranslatedFields
+
 from tag.models import ArticleTaggedItem, TaggableManagerN
 
 
-class Blog(models.Model):
-    title = models.CharField(max_length=128, unique=True)
+class Blog(TranslatableModel):
+    translations = TranslatedFields(
+        title = models.CharField(max_length=128),
+        preview = models.TextField(default='', blank=True),
+        body = models.TextField(default=''),
+    )
+    name = models.CharField(max_length=128, unique=True)
     slug = models.SlugField(max_length=128, unique=True)
-    preview = models.TextField(default='', blank=True)
-    body = models.TextField(default='')
     deleted = models.BooleanField(default=False)
     author = models.ForeignKey(User, null=True)
     front_page = models.BooleanField(default=True)
@@ -20,4 +26,4 @@ class Blog(models.Model):
     tags = TaggableManagerN(through=ArticleTaggedItem)
 
     def __unicode__(self):
-        return u'%s' % self.title
+        return self.safe_translation_getter('title', 'MyMode: %s' % self.pk)
