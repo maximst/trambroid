@@ -22,18 +22,16 @@ class DrupalAuthenticate(object):
       try:
         user = User.objects.get(username=username)
       except User.DoesNotExist:
-        # Create a new user. Note that we can set password
-        # to anything, because it won't be checked; the password
-        # from settings.py will.
+        #TODO: Need add first_name and last_name fields
         user = User(
           username=username,
-          password=password,
         )
 
         user.profile.avatar = str(drupal_user.picture) + '.png'
         user.profile.timezone = drupal_user.timezone
         user.profile.signature = drupal_user.signature
 
+        user.set_password(password)
         user.is_staff = False
         user.is_superuser = False
         user.save()
