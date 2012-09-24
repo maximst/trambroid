@@ -20,7 +20,7 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         if self.user.get_full_name():
-            return u'%s' % (self.user.get_full_name())
+            return u'%s (%s)' % (self.user.get_full_name(), self.user.username)
         else:
             return u'%s' % self.user.username
 
