@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'tag',
     'user_profile',
     'content',
+    'drupal',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -154,6 +155,10 @@ LOGGING = {
         },
     }
 }
+
+AUTHENTICATION_BACKENDS = (
+    'drupal.auth.DrupalAuthenticate',
+)
 
 STUPIDITY_LEVELS = (
     (0, '1'),
