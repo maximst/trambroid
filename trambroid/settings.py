@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'voting',
     'taggit',
     'tag',
+    'user_profile',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -151,6 +152,13 @@ LOGGING = {
         },
     }
 }
+
+STUPIDITY_LEVELS = (
+    (0, '1'),
+    (1, '2'),
+    (2, '3'),
+    (3, '4'),
+)
 
 try:
     from local_settings import *
