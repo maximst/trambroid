@@ -11,9 +11,9 @@ class Migration(SchemaMigration):
         # Adding model 'BlogTranslation'
         db.create_table('content_blog_translation', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=128)),
             ('preview', self.gf('django.db.models.fields.TextField')(default='', blank=True)),
             ('body', self.gf('django.db.models.fields.TextField')(default='')),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=128)),
             ('language_code', self.gf('django.db.models.fields.CharField')(max_length=15, db_index=True)),
             ('master', self.gf('django.db.models.fields.related.ForeignKey')(related_name='translations', null=True, to=orm['content.Blog'])),
         ))
@@ -22,22 +22,19 @@ class Migration(SchemaMigration):
         # Adding unique constraint on 'BlogTranslation', fields ['language_code', 'master']
         db.create_unique('content_blog_translation', ['language_code', 'master_id'])
 
-        # Adding model 'Blog'
-        db.create_table('content_blog', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=128)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=128)),
-            ('deleted', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True)),
-            ('front_page', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('on_top', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('create_time', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('edit_time', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('ip', self.gf('django.db.models.fields.GenericIPAddressField')(default='127.0.0.1', max_length=39)),
-            ('nid', self.gf('django.db.models.fields.IntegerField')(default=0, max_length=10, blank=True)),
-            ('drupal_slug', self.gf('django.db.models.fields.CharField')(default='', max_length=255, blank=True)),
-        ))
-        db.send_create_signal('content', ['Blog'])
+        # Deleting field 'Blog.body'
+        db.delete_column('content_blog', 'body')
+
+        # Deleting field 'Blog.title'
+        db.delete_column('content_blog', 'title')
+
+        # Deleting field 'Blog.preview'
+        db.delete_column('content_blog', 'preview')
+
+        # Adding field 'Blog.name'
+        db.add_column('content_blog', 'name',
+                      self.gf('django.db.models.fields.CharField')(default='', unique=True, max_length=128),
+                      keep_default=False)
 
 
     def backwards(self, orm):
@@ -47,8 +44,23 @@ class Migration(SchemaMigration):
         # Deleting model 'BlogTranslation'
         db.delete_table('content_blog_translation')
 
-        # Deleting model 'Blog'
-        db.delete_table('content_blog')
+        # Adding field 'Blog.body'
+        db.add_column('content_blog', 'body',
+                      self.gf('django.db.models.fields.TextField')(default=''),
+                      keep_default=False)
+
+        # Adding field 'Blog.title'
+        db.add_column('content_blog', 'title',
+                      self.gf('django.db.models.fields.CharField')(default='', max_length=128, unique=True),
+                      keep_default=False)
+
+        # Adding field 'Blog.preview'
+        db.add_column('content_blog', 'preview',
+                      self.gf('django.db.models.fields.TextField')(default='', blank=True),
+                      keep_default=False)
+
+        # Deleting field 'Blog.name'
+        db.delete_column('content_blog', 'name')
 
 
     models = {

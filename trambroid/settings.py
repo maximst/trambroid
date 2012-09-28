@@ -115,16 +115,16 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
+     'django.contrib.admin',
+     'django.contrib.admindocs',
     'south',
     'voting',
     'taggit',
     'hvad',
-    'apps.tag',
-    'apps.user_profile',
-    'apps.content',
-    'apps.drupal',
+    'tag',
+    'user_profile',
+    'content',
+    'drupal',
 )
 
 # A sample logging configuration. The only tangible logging

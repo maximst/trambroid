@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 from hvad.models import TranslatableModel, TranslatedFields
 
-from apps.tag.models import ArticleTaggedItem, TaggableManagerN
+from tag.models import ArticleTaggedItem, TaggableManagerN
 
 
 class Blog(TranslatableModel):
