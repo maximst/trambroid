@@ -15,7 +15,7 @@ class DrupalAuthenticate(object):
     try:
       drupal_user = DrupalUser.objects.get(name=username)
     except DrupalUser.DoesNotExist:
-      drupal_user = False
+      return None
 
     pwd_valid = check_password(password, drupal_user.pass_field)
     if drupal_user and pwd_valid:
