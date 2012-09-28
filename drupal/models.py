@@ -3,7 +3,7 @@ from django.db import models
 class DrupalUser(models.Model):
     uid = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=180, unique=True)
-    pass_field = models.CharField(max_length=384, db_column='pass') # Field renamed because it was a Python reserved word.
+    pass_field = models.CharField(max_length=384, db_column='pass')
     mail = models.CharField(max_length=762, blank=True)
     theme = models.CharField(max_length=765)
     signature = models.CharField(max_length=765)

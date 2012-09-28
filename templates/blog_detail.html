@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% load comments %}
+    <h2>{{ content.title }}</h2>
+    <br>{{ content.body }}
+    <br>{% render_comment_list for content %}
+    <br>{% render_comment_form for content %}
+
+{% endblock %}

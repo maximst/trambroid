@@ -56,3 +56,12 @@ def check_password(password, pass_hash):
   else:
     return False
 
+def split_name(name):
+    for i in [' ', '.', '_', '-', '+']:
+        name_list = name.split(' ')
+        if len(name_list):
+            return name_list[:2]
+            break
+    else:
+        return [name, '']
+

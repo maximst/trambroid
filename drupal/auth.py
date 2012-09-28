@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 
 from models import DrupalUser
-from functions import check_password
+from functions import check_password, split_name
 
 '''
 This module need to authenticate users from Drupal database
@@ -22,7 +22,6 @@ class DrupalAuthenticate(object):
       try:
         user = User.objects.get(username=username)
       except User.DoesNotExist:
-        #TODO: Need add first_name and last_name fields
         user = User(
           username=username,
         )
@@ -31,6 +30,8 @@ class DrupalAuthenticate(object):
         user.profile.timezone = drupal_user.timezone
         user.profile.signature = drupal_user.signature
 
+        user.first_name, user.last_name = split_name(drupal_user.name)
+        user.email = drupal_user.mail
         user.set_password(password)
         user.is_staff = False
         user.is_superuser = False

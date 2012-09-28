@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load comments %}
+{% for row in content %}
+    {% get_comment_count for row as comment_count %}
+<div id="preview-{{ row.id }}" class="fp-list">
+    <a href="{% url blog slug=row.slug %}" title="Go to: {{ row.title }}"><h3>{{ row.title }}</h3></a> Comments: {{ comment_count }}
+    <div>
+	{{ row.preview }}
+    </div>
+
+</div>
+{% endfor %}
+
+{% endblock %}
