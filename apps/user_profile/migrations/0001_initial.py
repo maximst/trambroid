@@ -12,9 +12,9 @@ class Migration(SchemaMigration):
         db.create_table('user_profile_userprofile', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
-            ('avatar', self.gf('django.db.models.fields.files.ImageField')(default='user_avatars/default.png', max_length=100)),
+            ('avatar', self.gf('django.db.models.fields.files.ImageField')(default='user_avatars/default.png', max_length=100, blank=True)),
             ('stupidity_level', self.gf('django.db.models.fields.SmallIntegerField')(default=0, max_length=1)),
-            ('signature', self.gf('django.db.models.fields.CharField')(default='<img alt="" src="http://www.trambroid.com/files/userbar.png" />', max_length=255)),
+            ('signature', self.gf('django.db.models.fields.CharField')(default='<img alt="" src="http://www.trambroid.com/files/userbar.png" />', max_length=255, blank=True)),
             ('timezone', self.gf('django.db.models.fields.CharField')(default='Europe/Kiev', max_length=32)),
         ))
         db.send_create_signal('user_profile', ['UserProfile'])
@@ -64,9 +64,9 @@ class Migration(SchemaMigration):
         },
         'user_profile.userprofile': {
             'Meta': {'object_name': 'UserProfile'},
-            'avatar': ('django.db.models.fields.files.ImageField', [], {'default': "'user_avatars/default.png'", 'max_length': '100'}),
+            'avatar': ('django.db.models.fields.files.ImageField', [], {'default': "'user_avatars/default.png'", 'max_length': '100', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'signature': ('django.db.models.fields.CharField', [], {'default': '\'<img alt="" src="http://www.trambroid.com/files/userbar.png" />\'', 'max_length': '255'}),
+            'signature': ('django.db.models.fields.CharField', [], {'default': '\'<img alt="" src="http://www.trambroid.com/files/userbar.png" />\'', 'max_length': '255', 'blank': 'True'}),
             'stupidity_level': ('django.db.models.fields.SmallIntegerField', [], {'default': '0', 'max_length': '1'}),
             'timezone': ('django.db.models.fields.CharField', [], {'default': "'Europe/Kiev'", 'max_length': '32'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'})
