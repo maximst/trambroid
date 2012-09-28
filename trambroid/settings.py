@@ -1,5 +1,10 @@
 # Django settings for trambroid project.
 
+import os
+
+def autopath(dirname):
+    return os.path.join(os.path.dirname(__file__), dirname).replace('\\', '/')
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -121,6 +126,7 @@ INSTALLED_APPS = (
     'voting',
     'taggit',
     'hvad',
+    # TRAMBROID apps
     'tag',
     'user_profile',
     'content',
@@ -157,6 +163,7 @@ LOGGING = {
 }
 
 AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
     'drupal.auth.DrupalAuthenticate',
 )
 
