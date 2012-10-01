@@ -7,14 +7,80 @@
 <head>
     <title>{{ page_title }}</title>
     <link rel="author" title="Maxim Starodubcev" href="mailto: (author) maxim@trambroid.com">
+    <script type="javascript" src="{% get_static_prefix %}js/bootstrap.js"></script>
     <link rel="stylesheet" href="{% get_static_prefix %}css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="{% get_static_prefix %}css/bootstrap-responsive.css" type="text/css"/>
 </head>
 
 <body>
-<header>
-    <h1>{{ page_title }}</h1>
-</header>
-    {% block content %}{% endblock %}
+
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="btn btn-inverse" href="/">Home</a>
+            <ul class="nav">
+              {% url blog-list as blog_url %}
+              <li class="active"><a href="{{ blog_url }}">Blogs</a></li>
+              <li><a href="#">Forum</a></li>
+              <li><a href="#">Comments</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <h4>Interview</h4>
+      <table class="table table-striped">
+        <tr><td>
+          <div class="progress progress-striped active">
+            <div class="bar" style="width: 40%;"></div>
+          </div>
+        </tr>
+        <tr><td>
+          <div class="progress progress-striped active">
+            <div class="bar" style="width: 10%;"></div>
+          </div>
+        </tr>
+        <tr><td>
+          <div class="progress progress-striped active">
+            <div class="bar" style="width: 80%;"></div>
+          </div>
+        </tr>
+      </table>
+    </div>
+    <div class="span10">
+      {% block content %}{% endblock %}
+      <div class="btn-group">
+        <button class="btn">1</button>
+        <button class="btn">2</button>
+        <button class="btn">3</button>
+      </div>
+      <ul class="breadcrumb">
+        <li><a href="#">Home</a> <span class="divider">/</span></li>
+        <li><a href="#">Library</a> <span class="divider">/</span></li>
+        <li class="active">Data</li>
+      </ul>
+      <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Warning!</strong> Best check yo self, you're not looking too good.
+      </div>
+      <div class="pagination">
+        <ul>
+          <li class="disabled"><a href="#">Prev.</a></li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li><a href="#">6</a></li>
+          <li><a href="#">7</a></li>
+          <li><a href="#">Next</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
