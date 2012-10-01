@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -6,10 +7,13 @@
 <head>
     <title>{{ page_title }}</title>
     <link rel="author" title="Maxim Starodubcev" href="mailto: (author) maxim@trambroid.com">
+    <link rel="stylesheet" href="{% get_static_prefix %}css/bootstrap.css" type="text/css"/>
 </head>
 
 <body>
+<header>
     <h1>{{ page_title }}</h1>
+</header>
     {% block content %}{% endblock %}
 
 </body>
