@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 
+from user_profile.models import UserProfile
 from models import DrupalUser
 from functions import check_password, split_name
 
@@ -26,16 +27,18 @@ class DrupalAuthenticate(object):
           username=username,
         )
 
-        user.profile.avatar = str(drupal_user.picture) + '.png'
-        user.profile.timezone = drupal_user.timezone
-        user.profile.signature = drupal_user.signature
-
         user.first_name, user.last_name = split_name(drupal_user.name)
         user.email = drupal_user.mail
         user.set_password(password)
         user.is_staff = False
         user.is_superuser = False
         user.save()
+
+        user_profile = UserProfile.objects.get(user=user)
+        user_profile.avatar = str(drupal_user.picture) + '.png'
+        user_profile.timezone = drupal_user.timezone
+        user_profile.signature = drupal_user.signature
+        user_profile.save()
       return user
     return None
 
