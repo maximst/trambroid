@@ -1,4 +1,5 @@
 {% load coretags %}
+{% if content.paginator %}
 <div class="pagination">
   <ul>
     <li{% if not content.has_previous %} class="disabled"{% endif %}><a href="?p={{ content.previous_page_number }}">Prev.</a></li>
@@ -20,3 +21,4 @@
     <li{% if not content.has_next %} class="disabled"{% endif %}><a href="?p={{ content.next_page_number }}">Next</a></li>
   </ul>
 </div>
+{% endif %}
