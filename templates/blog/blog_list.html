@@ -6,6 +6,15 @@
     {% get_comment_count for row as comment_count %}
 <div id="preview-{{ row.id }}" class="fp-list">
     <a href="{% url blog slug=row.slug %}" title="Go to: {{ row.title }}"><h3>{{ row.title }}</h3></a>
+    {% if row.tags.all %}
+      <small>
+        Tags:
+        {% for t in row.tags.all %}
+          <a href="/tag/{{ t.slug }}">{{ t.name }}</a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      </small>
+      <br/>
+    {% endif %}
     <div>
 	{{ row.preview }}
     </div>
