@@ -4,6 +4,10 @@ from django.conf import settings
 
 register = template.Library()
 
+@register.filter
+def diff(value, arg):
+    return int(value) - arg
+
 @register.inclusion_tag('menubar.html', takes_context=True)
 def menubar(context):
     sections = []
@@ -24,7 +28,7 @@ def breadcrump(context):
     urls = map(lambda c: crumps[:crumps.index(c)+1], crumps)
     urls[0].append(u'')
 
-    titles = ['Home'] + crumps[1:]
+    titles = ['home'] + crumps[1:]
 
     crumps = zip(urls, titles)
     return {'crumps': crumps}

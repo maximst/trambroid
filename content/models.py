@@ -26,4 +26,4 @@ class Blog(TranslatableModel):
     tags = TaggableManagerN(through=ArticleTaggedItem)
 
     def __unicode__(self):
-        return self.safe_translation_getter('title', 'MyMode: %s' % self.pk)
+        return self.safe_translation_getter('title', 'Blog: %s' % self.pk)
