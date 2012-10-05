@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'taggit',
     'hvad',
     # TRAMBROID apps
+    'core',
     'tag',
     'user_profile',
     'content',
@@ -170,6 +171,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
 )
+CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -181,6 +183,12 @@ STUPIDITY_LEVELS = (
     (1, '2'),
     (2, '3'),
     (3, '4'),
+)
+
+MENU_ITEMS = (
+    ('blog', 'Blog'),
+    ('forum', 'Forum'),
+    ('comment', 'Comment'),
 )
 
 try:
