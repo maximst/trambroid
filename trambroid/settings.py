@@ -191,6 +191,10 @@ MENU_ITEMS = (
     ('comment', 'Comment'),
 )
 
+DISPLAY_CONTENT_TYPES = (
+    'blog',
+)
+
 try:
     from local_settings import *
 except:
