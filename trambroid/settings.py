@@ -173,6 +173,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS
 
+LOGIN_URL = '/accounts/login/'
+
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'drupal.auth.DrupalAuthenticate',

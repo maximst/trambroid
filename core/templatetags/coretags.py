@@ -23,7 +23,8 @@ def menubar(context):
         sections.append({'slug': slug, 'title': title, 'url': url})
 
     current_section = context['request'].META['PATH_INFO'].split('/')[1]
-    return {'current_section': current_section, 'sections': sections}
+    return {'current_section': current_section, 'sections': sections,
+                                       'user': context['request'].user}
 
 @register.inclusion_tag('breadcrump.html', takes_context=True)
 def breadcrump(context):

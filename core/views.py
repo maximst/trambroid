@@ -6,6 +6,7 @@ from django.http import Http404
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.contrib.auth import logout as django_logout
 
 from voting.models import Vote
 
@@ -13,6 +14,16 @@ from voting.models import Vote
 def homepage(request):
     model = ContentType.objects.get(app_label='content',
                                     model=settings.DISPLAY_CONTENT_TYPES[0])
+    return None
+
+def logout(request):
+    redirect_url = request.META.get('HTTP_REFERER')
+    if not redirect_url or reverse('login') in redirect_url:
+        redirect_url = '/'
+    django_logout(request)
+    return redirect(redirect_url)
+
+def profile(request):
     return None
 
 @login_required
@@ -33,7 +44,7 @@ def vote(request, app, model, pk, vote):
 
     Vote.objects.record_vote(obj, user, int(vote))
 
-    if not redirect_url:
+    if not redirect_url or reverse('login') in redirect_url:
         try:
             redirect_url = reverse(model, kwargs={'slug': obj.slug})
         except:

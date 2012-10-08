@@ -1,0 +1,5 @@
+<div class="vote-block" title="Score: {{ score.score }} / Votes: {{ score.num_votes }}">
+<a href="{% url vote app=app model=model pk=pk vote="1" %}" title="Up"><i class="icon-thumbs-up"></i></a>
+<div {% if score.score < 0 %}class="text-error"{% endif %}{% if score.score > 0 %}class="text-success"{% endif %}>{{ score.score }}</div>
+<a href="{% url vote app=app model=model pk=pk vote="-1" %}" title="Down"><i class="icon-thumbs-down"></i></a>
+</div>
