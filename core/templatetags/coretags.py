@@ -1,6 +1,10 @@
 from django import template
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.core.paginator import Page
+from django.contrib.contenttypes.models import ContentType
+
+from voting.models import Vote
 
 register = template.Library()
 
@@ -33,3 +37,10 @@ def breadcrump(context):
     crumps = zip(urls, titles)
     return {'crumps': crumps}
 
+@register.inclusion_tag('vote.html', takes_context=True)
+def vote(context):
+    if not isinstance(context['content'], Page):
+        ct = ContentType.objects.get_for_model(context['content'].__class__)
+    score = Vote.objects.get_score(context['content'])
+    return {'app': ct.app_label, 'model': ct.model,
+             'pk': context['content'].pk, 'score': score}

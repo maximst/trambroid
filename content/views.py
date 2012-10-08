@@ -19,16 +19,14 @@ def blog_detail(request, slug):
 
 def blog_list(request, get):
     contents = Blog.objects.all()
-    paginator = Paginator(contents, 30) # Show 25 contacts per page
+    paginator = Paginator(contents, 30)
 
     page = request.GET.get('p')
     try:
         content = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
         content = paginator.page(1)
     except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
         content = paginator.page(paginator.num_pages)
     return render_to_response('blog/blog_list.html', {'content': content},
                               context_instance=RequestContext(request))
