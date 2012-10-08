@@ -3,8 +3,8 @@
 import os
 
 def autopath(dirname):
-    return os.path.join(os.path.dirname(__file__),
-                       '../' + dirname).replace('\\', '/')
+    return os.path.join(os.path.split(os.path.dirname(__file__)\
+				  .replace('\\', '/'))[0], dirname)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
