@@ -5,7 +5,7 @@
     {% load comments %}
     <h2>{{ content.title }}</h2>
     {% vote %}
-    <br>{{ content.body }}
+    {{ content.body }}
     <br>{% render_comment_list for content %}
     <br>{% render_comment_form for content %}
 {% endblock %}
