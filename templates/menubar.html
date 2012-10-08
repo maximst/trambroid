@@ -1,7 +1,7 @@
 <div class="navbar navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <a class="btn btn-inverse" href="/">Home</a>
+      <a class="brand" href="/">TRAMBROID</a>
       <ul class="nav">
         {% for section in sections %}
           <li {% if section.slug == current_section %}class="active"{% endif %}><a href="{{ section.url }}">{{ section.title }}</a></li>
