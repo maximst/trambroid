@@ -20,4 +20,11 @@
 
 .vote-block {
     padding: 3px 3px 3px 30px;
+    font-size: 120%;
+}
+
+.vote-block div {
+    text-align: center;
+    min-width: 16px;
+    display: inline-block;
 }
