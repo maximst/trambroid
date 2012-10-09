@@ -102,4 +102,7 @@
     -o-box-shadow: 0 2px 7px #000;
     -ms-box-shadow: 0 2px 7px #000;
     opacity: 0.9;
+    border: 1px solid #ccc;
+    background: #aaa;
+    color: #000;
 }
