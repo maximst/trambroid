@@ -28,3 +28,58 @@
     min-width: 16px;
     display: inline-block;
 }
+
+.container-fluid {
+    padding-top: 50px;
+}
+
+.navbar {
+    box-shadow: 0 3px 20px #000;
+    -moz-box-shadow: 0 3px 20px #000;
+    -webkit-box-shadow: 0 3px 20px #000;
+    -khtml-box-shadow: 0 3px 20px #000;
+    -o-box-shadow: 0 3px 20px #000;
+    -ms-box-shadow: 0 3px 20px #000;
+}
+
+.navbar-inner {
+    background: #e8e8e8; /* Old browsers */
+    background: -moz-linear-gradient(top, #e8e8e8 0%, #b5b5b5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e8e8e8), color-stop(100%,#b5b5b5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e8e8e8 0%,#b5b5b5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e8e8e8 0%,#b5b5b5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #e8e8e8 0%,#b5b5b5 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #e8e8e8 0%,#b5b5b5 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e8', endColorstr='#b5b5b5',GradientType=0 ); /* IE6-9 */
+
+}
+
+.navbar-fixed-top .container {
+    width: auto;
+    margin: 0 10px 0 10px;
+}
+
+.navbar a {
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    color: #333 !important;
+    text-shadow: 0 1px 0 #fff !important;
+    -moz-text-shadow: 0 1px 0 #fff !important;
+    -webkit-text-shadow: 0 1px 0 #fff !important;
+    -khtml-text-shadow: 0 1px 0 #fff !important;
+    -o-text-shadow: 0 1px 0 #fff !important;
+    -ms-text-shadow: 0 1px 0 #fff !important;
+}
+
+.navbar a:hover {
+    color: #000 !important;
+    text-shadow: 0 1px 0 #fff, 0 0 5px #333 !important;
+    -moz-text-shadow: 0 1px 0 #fff, 0 0 5px #333 !important;
+    -webkit-text-shadow: 0 1px 0 #fff, 0 0 10px #333 !important;
+    -khtml-text-shadow: 0 1px 0 #fff, 0 0 10px #333 !important;
+    -o-text-shadow: 0 1px 0 #fff, 0 0 10px #333 !important;
+    -ms-text-shadow: 0 1px 0 #fff, 0 0 5px #333 !important;
+}
