@@ -10,9 +10,10 @@
       <span class="float-right">
       <ul class="nav">
         {% if user.is_authenticated %}
-          <li><a href="{% url profile %}">{{ user.first_name }} {{ user.last_name }} ({{ user }})</a></li>
+          <li><a href="{% url profile %}" title="My profile">{{ user.first_name }} {{ user.last_name }} ({{ user }})</a></li>
           <li><a href="{% url logout %}">Logout</a></li>
         {% else %}
+          <li class="btn disabled">You are not logged in.</li>
           <li><a href="{% url login %}">Login</a></li>
         {% endif %}
       </ul>
