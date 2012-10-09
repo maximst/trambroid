@@ -23,7 +23,7 @@
     font-size: 120%;
 }
 
-.vote-block div {
+.vote-block #score_votes {
     text-align: center;
     min-width: 16px;
     display: inline-block;
@@ -87,4 +87,19 @@
     -khtml-text-shadow: 0 1px 0 #fff, 0 0 10px #333 !important;
     -o-text-shadow: 0 1px 0 #fff, 0 0 10px #333 !important;
     -ms-text-shadow: 0 1px 0 #fff, 0 0 5px #333 !important;
+}
+
+.no-display {
+    display: none;
+}
+
+#success_alert {
+    position: absolute;
+    box-shadow: 0 2px 5px #000;
+    -moz-box-shadow: 0 2px 5px #000;
+    -webkit-box-shadow: 0 2px 7px #000;
+    -khtml-box-shadow: 0 2px 7px #000;
+    -o-box-shadow: 0 2px 7px #000;
+    -ms-box-shadow: 0 2px 7px #000;
+    opacity: 0.9;
 }

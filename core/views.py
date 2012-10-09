@@ -2,11 +2,12 @@
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout as django_logout
+from django.utils import simplejson as json
 
 from voting.models import Vote
 
@@ -49,5 +50,8 @@ def vote(request, app, model, pk, vote):
             redirect_url = reverse(model, kwargs={'slug': obj.slug})
         except:
             redirect_url = '/'
-
-    return redirect(redirect_url)
+    if request.is_ajax():
+        score = Vote.objects.get_score(obj)
+        return HttpResponse(json.dumps(score), mimetype="application/json")
+    else:
+        return redirect(redirect_url)

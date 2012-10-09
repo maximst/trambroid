@@ -43,5 +43,5 @@ def vote(context):
     if not isinstance(context['content'], Page):
         ct = ContentType.objects.get_for_model(context['content'].__class__)
     score = Vote.objects.get_score(context['content'])
-    return {'app': ct.app_label, 'model': ct.model,
-             'pk': context['content'].pk, 'score': score}
+    return {'app': ct.app_label, 'model': ct.model, 'pk': context['content'].pk,
+                              'score': score, 'user': context['request'].user}
