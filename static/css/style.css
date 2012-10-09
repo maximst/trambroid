@@ -76,6 +76,11 @@
 
 .navbar a:hover {
     color: #000 !important;
+    transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
     text-shadow: 0 1px 0 #fff, 0 0 5px #333 !important;
     -moz-text-shadow: 0 1px 0 #fff, 0 0 5px #333 !important;
     -webkit-text-shadow: 0 1px 0 #fff, 0 0 10px #333 !important;
