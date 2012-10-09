@@ -60,11 +60,11 @@
 }
 
 .navbar a {
-    transition: all 0.5s ease 0s;
-    -moz-transition: all 0.5s ease 0s;
-    -webkit-transition: all 0.5s ease 0s;
-    -o-transition: all 0.5s ease 0s;
-    -ms-transition: all 0.5s ease 0s;
+    transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -webkit-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    -ms-transition: all 0.7s ease 0s;
     color: #333 !important;
     text-shadow: 0 1px 0 #fff !important;
     -moz-text-shadow: 0 1px 0 #fff !important;
@@ -76,11 +76,6 @@
 
 .navbar a:hover {
     color: #000 !important;
-    transform: rotate(-180deg);
-    -moz-transform: rotate(-180deg);
-    -webkit-transform: rotate(-180deg);
-    -o-transform: rotate(-180deg);
-    -ms-transform: rotate(-180deg);
     text-shadow: 0 1px 0 #fff, 0 0 5px #333 !important;
     -moz-text-shadow: 0 1px 0 #fff, 0 0 5px #333 !important;
     -webkit-text-shadow: 0 1px 0 #fff, 0 0 10px #333 !important;
@@ -105,4 +100,23 @@
     border: 1px solid #ccc;
     background: #aaa;
     color: #000;
+}
+
+#most_important {
+    text-align: center;
+    padding: 60px 0 60px 0;
+    transition: all 1s ease 0s;
+    -moz-transition: all 1s ease 0s;
+    -webkit-transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    -ms-transition: all 1s ease 0s;
+}
+
+#most_important:hover {
+    transform: rotate(-540deg);
+    -moz-transform: rotate(-540deg);
+    -webkit-transform: rotate(-540deg);
+    -o-transform: rotate(-540deg);
+    -ms-transform: rotate(-540deg);
+    text-shadow: 0 0 40px #0af, 0 0 30px #0af, 0 0 20px #0af, 0 0 10px #0af;
 }
