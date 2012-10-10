@@ -100,9 +100,9 @@ body {
     -khtml-box-shadow: 0 2px 7px #000;
     -o-box-shadow: 0 2px 7px #000;
     -ms-box-shadow: 0 2px 7px #000;
-    opacity: 0.8;
-    border: 1px solid #ccc;
-    background: #aaa;
+    opacity: 0.85;
+    border: 1px solid #eee;
+    background: #ccc;
     color: #000;
 }
 
@@ -180,13 +180,7 @@ input[type="checkbox"]:hover,
     background: -ms-linear-gradient(top, #f0f0f0 0%,#ccc 100%); /* IE10+ */
     background: linear-gradient(to bottom, #f0f0f0 0%,#ccc 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#ccc',GradientType=0 ); /* IE6-9 */
-    box-shadow: 0 1px 4px #0af;
-    -moz-box-shadow: 0 1px 4px #0af;
-    -webkit-box-shadow: 0 1px 5px #0af, 0 1px 3px #0af;
-    -khtml-box-shadow: 0 1px 5px #0af, 0 1px 3px #0af;
-    -o-box-shadow: 0 1px 5px #0af, 0 1px 3px #0af;
-    -ms-box-shadow: 0 1px 5px #0af, 0 1px 3px #0af;
-    border-color: #fff;
+    border-color: #0af;
 }
 
 textarea,
@@ -243,6 +237,25 @@ input[type="color"]:focus,
     -khtml-box-shadow: 0 1px 4px #000 inset;
     -o-box-shadow: 0 1px 4px #000 inset;
     -ms-box-shadow: 0 1px 4px #000 inset;
+}
+
+textarea:hover,
+input[type="text"]:hover,
+input[type="password"]:hover,
+input[type="datetime"]:hover,
+input[type="datetime-local"]:hover,
+input[type="date"]:hover,
+input[type="month"]:hover,
+input[type="time"]:hover,
+input[type="week"]:hover,
+input[type="number"]:hover,
+input[type="email"]:hover,
+input[type="url"]:hover,
+input[type="search"]:hover,
+input[type="tel"]:hover,
+input[type="color"]:hover,
+.uneditable-inpu {
+    border: 1px solid #0af;
 }
 
 textarea {
