@@ -1,5 +1,5 @@
 body {
-    background: #e7e7e7;
+    background: #e0e0e0;
 }
 
 .float-left {
@@ -133,7 +133,10 @@ input[type="button"],
 input[type="radio"],
 input[type="checkbox"],
 .submit-post,
-.submit-preview {
+.submit-preview,
+.btn {
+    padding: 0 3px;
+    margin: 5px;
     background: #e8e8e8; /* Old browsers */
     background: -moz-linear-gradient(top, #e8e8e8 0%, #b5b5b5 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e8e8e8), color-stop(100%,#b5b5b5)); /* Chrome,Safari4+ */
@@ -171,7 +174,8 @@ input[type="button"]:hover,
 input[type="radio"]:hover,
 input[type="checkbox"]:hover,
 .submit-post:hover,
-.submit-preview:hover {
+.submit-preview:hover,
+.btn:hover {
     background: #f0f0f0; /* Old browsers */
     background: -moz-linear-gradient(top, #f0f0f0 0%, #ccc 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f0f0), color-stop(100%,#ccc)); /* Chrome,Safari4+ */
@@ -261,4 +265,46 @@ input[type="color"]:hover,
 textarea {
     height: 160px;
     width: 70%;
+}
+
+.content-list {
+    padding: 0 10px 0 10px;
+    background: #eee;
+    border: 1px solid #f5f5f5;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius:  5px;
+    box-shadow: 0 0 3px #444444 inset;
+    -moz-box-shadow: 0 0 3px #444444 inset;
+    -webkit-box-shadow: 0 0 4px #444444 inset;
+    -khtml-box-shadow: 0 0 4px #444444 inset;
+    -o-box-shadow: 0 0 4px #444444 inset;
+    -ms-box-shadow: 0 0 4px #444444 inset;
+    margin: 5px;
+}
+
+.content-list-header h4 {
+    margin: 5px 0 0 0;
+}
+
+.content-list-header {
+    border-bottom: 1px solid #aaa;
+    margin: 0 0 10px 0;
+    box-shadow: 0 1px 0 #fff;
+    -moz-box-shadow: 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 0 #fff;
+    -khtml-box-shadow: 0 1px 0 #fff;
+    -o-box-shadow: 0 1px 0 #fff;
+    -ms-box-shadow: 0 1px 0 #fff;
+}
+
+.content-list-footer {
+    text-align: right;
+}
+
+.content-list-footer a {
+    padding: 0 5px;
 }

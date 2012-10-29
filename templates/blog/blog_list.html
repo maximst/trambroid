@@ -4,8 +4,9 @@
 {% load comments %}
 {% for row in content %}
     {% get_comment_count for row as comment_count %}
-<div id="preview-{{ row.id }}" class="fp-list">
-    <a href="{% url blog slug=row.slug %}" title="Go to: {{ row.title }}"><h3>{{ row.title }}</h3></a>
+<div id="preview-{{ row.id }}" class="fp-list blog-list content-list">
+  <div class="blog-list-header content-list-header">
+    <a href="{% url blog slug=row.slug %}" title="Go to: {{ row.title }}"><h4>{{ row.title }}</h4></a>
     {% if row.tags.all %}
       <small>
         Tags:
@@ -15,10 +16,16 @@
       </small>
       <br/>
     {% endif %}
-    <div>
+  </div>
+  <div class="blog-list-body content-list-body">
 	{{ row.preview }}
-    </div>
-    <small>Comments: {{ comment_count }}</small>
+  </div>
+  <div class="blog-list-footer content-list-footer">
+      <small><a href="{% url blog slug=row.slug %}">Read more</a></small>
+      {% if comment_count %}<small><a href="{% url blog slug=row.slug %}#comments">{{ comment_count }} Comments</a></small>{% endif %}
+      {% if user.is_authenticated %}<small><a href="{% url blog slug=row.slug %}#comment_form">Add Comment</a></small>{% endif %}
+      <small><a href="#">{% if row.author.first_name or row.author.last_name %}{{ row.author.first_name }} {{ row.author.last_name }}{% else %}{{ row.author.username }}{% endif %} blog</a></small>
+  </div>
 </div>
 {% endfor %}
 

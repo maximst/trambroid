@@ -10,6 +10,7 @@
       <span class="float-right">
       <ul class="nav">
         {% if user.is_authenticated %}
+          {% if user.is_superuser %}<li><a href="{% url admin:index %}">Admin</a></li>{% endif %}
           <li><a href="{% url profile %}" title="My profile">{{ user.first_name }} {{ user.last_name }} ({{ user }})</a></li>
           <li><a href="{% url logout %}">Logout</a></li>
         {% else %}
