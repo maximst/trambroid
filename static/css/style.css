@@ -339,7 +339,7 @@ textarea {
     min-height: 200px;
 }
 
-.content-author {
+.content-author, .comment-header {
     padding: 0 10px;
     font-size: 80%;
     color: #777;
@@ -400,4 +400,54 @@ textarea {
     -khtml-box-shadow: 0 0 7px #000 inset;
     -o-box-shadow: 0 0 7px #000 inset;
     -ms-box-shadow: 0 0 7px #000 inset;
+}
+
+.comment {
+    margin: 10px;
+    border: 1px solid #fff;
+    background: #e7e7e7;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+    box-shadow: 0 1px 3px #000;
+    -moz-box-shadow: 0 1px 3px #000;
+    -webkit-box-shadow: 0 1px 3px #000;
+    -khtml-box-shadow: 0 1px 3px #000;
+    -o-box-shadow: 0 1px 3px #000;
+    -ms-box-shadow: 0 1px 3px #000;
+}
+
+.comment-header {
+    margin: 0 5px;
+    border-bottom: 1px solid #555;
+    box-shadow: 0 1px 0 #fff;
+    -moz-box-shadow: 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 0 #fff;
+    -khtml-box-shadow: 0 1px 0 #fff;
+    -o-box-shadow: 0 1px 0 #fff;
+    -ms-box-shadow: 0 1px 0 #fff;
+}
+
+.comment-wrapper {
+    margin-left: 160px;
+}
+
+.comment-body {
+    min-height: 100px;
+    padding: 10px;
+}
+
+.comment-footer {
+    border-top: 1px solid #fff;
+    box-shadow: 0 -1px 0 #555;
+    -moz-box-shadow: 0 -1px 0 #555;
+    -webkit-box-shadow: 0 -1px 0 #555;
+    -khtml-box-shadow: 0 -1px 0 #555;
+    -o-box-shadow: 0 -1px 0 #555;
+    -ms-box-shadow: 0 -1px 0 #555;
+    margin: 10px 20px;
+    padding: 10px;
 }
