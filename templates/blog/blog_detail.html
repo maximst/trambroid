@@ -21,7 +21,7 @@
         </div>
         <div class="blog-detail-footer content-detail-footer">
         {% if content.tags.all %}
-        <span>
+        <span class="float-left">
         <small>
           Tags:
           {% for t in content.tags.all %}
@@ -30,6 +30,8 @@
         </small>
         </span>
         {% endif %}
+        {% if user.is_authenticated %}<small><a class="btn" href="#comment_form">Add Comment</a></small>{% endif %}
+        <small><a class="btn" href="#">{% if row.author.first_name or row.author.last_name %}{{ row.author.first_name }} {{ row.author.last_name }}{% else %}{{ row.author.username }}{% endif %} blog</a></small>
         </div>
       </div>
     <br>{% render_comment_list for content %}
