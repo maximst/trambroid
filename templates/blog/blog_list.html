@@ -7,20 +7,21 @@
 <div id="preview-{{ row.id }}" class="fp-list blog-list content-list">
   <div class="blog-list-header content-list-header">
     <a href="{% url blog slug=row.slug %}" title="Go to: {{ row.title }}"><h4>{{ row.title }}</h4></a>
-    {% if row.tags.all %}
-      <small>
-        Tags:
-        {% for t in row.tags.all %}
-          <a href="/tag/{{ t.slug }}">{{ t.name }}</a>{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-      </small>
-      <br/>
-    {% endif %}
   </div>
   <div class="blog-list-body content-list-body">
-	{{ row.preview }}
+    {% if user.is_superuser %}{{ row.preview|safe }}{% else %}{{ row.preview|striptags|linebreaks }}{% endif %}
   </div>
   <div class="blog-list-footer content-list-footer">
+      {% if row.tags.all %}
+        <span class="float-left">
+        <small>
+          Tags:
+          {% for t in row.tags.all %}
+            <a href="/tag/{{ t.slug }}">{{ t.name }}</a>{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </small>
+        </span>
+      {% endif %}
       <small><a class="btn" href="{% url blog slug=row.slug %}">Read more</a></small>
       {% if comment_count %}<small><a class="btn" href="{% url blog slug=row.slug %}#comments">{{ comment_count }} Comments</a></small>{% endif %}
       {% if user.is_authenticated %}<small><a class="btn" href="{% url blog slug=row.slug %}#comment_form">Add Comment</a></small>{% endif %}

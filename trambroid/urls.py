@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 
 from django.contrib import admin
 from django.contrib import auth
@@ -18,4 +19,6 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', auth.views.login, name='login'),
     url(r'^accounts/logout/$', logout, name='logout'),
     url(r'^accounts/profile/$', profile, name='profile'),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+                {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
 )
