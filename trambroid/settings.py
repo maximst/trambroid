@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'voting',
     'taggit',
     'hvad',
+    'social_auth',
     # TRAMBROID apps
     'core',
     'tag',
@@ -177,6 +178,8 @@ CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS
 LOGIN_URL = '/accounts/login/'
 
 AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.contrib.vkontakte.VKontakteOAuth2Backend',
     'django.contrib.auth.backends.ModelBackend',
     'drupal.auth.DrupalAuthenticate',
 )
@@ -197,6 +200,20 @@ MENU_ITEMS = (
 DISPLAY_CONTENT_TYPES = (
     'blog',
 )
+
+LOGIN_URL          = '/login-form/'
+LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_ERROR_URL    = '/login-error/'
+
+FACEBOOK_APP_ID = '160157440796472'
+FACEBOOK_API_SECRET = '692ee67684b24227f7871a0e395fce0e'
+FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'ru_RU'}
+FACEBOOK_EXTENDED_PERMISSIONS = ['user_photos']
+
+VK_APP_ID = '3222058'
+VK_API_SECRET = '40uiMRels7fjeAQgypOg'
+VK_EXTRA_SCOPE = ['photos', ]
+
 
 try:
     from local_settings import *
