@@ -170,8 +170,12 @@ LOGGING = {
 }
 
 TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.debug',
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
 )
 CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS
 
@@ -201,14 +205,14 @@ DISPLAY_CONTENT_TYPES = (
     'blog',
 )
 
-LOGIN_URL          = '/login-form/'
-LOGIN_REDIRECT_URL = '/profile/'
-LOGIN_ERROR_URL    = '/login-error/'
+LOGIN_URL          = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/accounts/profile/'
+LOGIN_ERROR_URL    = '/accounts/login-error/'
 
-FACEBOOK_APP_ID = '160157440796472'
-FACEBOOK_API_SECRET = '692ee67684b24227f7871a0e395fce0e'
+FACEBOOK_APP_ID = '365616846862745'
+FACEBOOK_API_SECRET = '8b2297f7819263e8e7ba1293d1acbe28'
 FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'ru_RU'}
-FACEBOOK_EXTENDED_PERMISSIONS = ['user_photos']
+#FACEBOOK_EXTENDED_PERMISSIONS = ['user_photos']
 
 VK_APP_ID = '3222058'
 VK_API_SECRET = '40uiMRels7fjeAQgypOg'

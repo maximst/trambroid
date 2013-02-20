@@ -11,7 +11,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^blog/(?P<slug>[\w\-]+)/$', blog_detail, name='blog'),
-    url(r'^blog/(\?p=\d+)?$', blog_list, name='blog-list'),
+    url(r'^blog/', blog_list, name='blog-list'),
+    url(r'^$', blog_list, name='home'),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^comments/', include('django.contrib.comments.urls')),
@@ -19,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', auth.views.login, name='login'),
     url(r'^accounts/logout/$', logout, name='logout'),
     url(r'^accounts/profile/$', profile, name='profile'),
+    url(r'^accounts/social/', include('social_auth.urls')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
                 {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
 )

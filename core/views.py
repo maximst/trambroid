@@ -25,7 +25,7 @@ def logout(request):
     return redirect(redirect_url)
 
 def profile(request):
-    return None
+    return redirect('/')
 
 @login_required
 def vote(request, app, model, pk, vote):

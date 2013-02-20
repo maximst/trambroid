@@ -1,26 +1,21 @@
 # -*-coding: utf8-*-
-from django.http import Http404
-from django.shortcuts import render_to_response
+from django.shortcuts import render, get_object_or_404
 from django.core.context_processors import csrf
-from django.template import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from models import Blog
 
 def blog_detail(request, slug):
-    try:
-        content = Blog.objects.get(slug=slug)
-    except Blog.DoesNotExist:
-        raise Http404()
+    print request.META['PATH_INFO']
+    content = get_object_or_404(Blog, slug=slug)
     contents = {'content': content}
     contents.update(csrf(request))
-    return render_to_response('blog/blog_detail.html', contents,
-                              context_instance=RequestContext(request))
+    return render(request, 'blog/blog_detail.html', contents)
 
 
-def blog_list(request, get):
+def blog_list(request):
     contents = Blog.objects.all()
     paginator = Paginator(contents, 30)
-
+    print request.META['PATH_INFO']
     page = request.GET.get('p')
     try:
         content = paginator.page(page)
@@ -28,5 +23,4 @@ def blog_list(request, get):
         content = paginator.page(1)
     except EmptyPage:
         content = paginator.page(paginator.num_pages)
-    return render_to_response('blog/blog_list.html', {'content': content},
-                              context_instance=RequestContext(request))
+    return render(request, 'blog/blog_list.html', {'content': content})
