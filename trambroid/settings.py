@@ -83,6 +83,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'coffeescript.finders.CoffeescriptFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -132,6 +133,7 @@ INSTALLED_APPS = (
     'taggit',
     'hvad',
     'social_auth',
+    'coffeescript',
     # TRAMBROID apps
     'core',
     'tag',
@@ -218,6 +220,7 @@ VK_APP_ID = '3222058'
 VK_API_SECRET = '40uiMRels7fjeAQgypOg'
 VK_EXTRA_SCOPE = ['photos', ]
 
+COFFEESCRIPT_ROOT = autopath('static')
 
 try:
     from local_settings import *

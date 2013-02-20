@@ -6,3 +6,4 @@ pytz
 PIL
 django-hvad
 django-social-auth
+django-coffeescript
