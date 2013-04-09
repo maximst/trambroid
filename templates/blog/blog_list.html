@@ -25,7 +25,7 @@
       <small><a class="btn" href="{% url blog slug=row.slug %}">Read more</a></small>
       {% if comment_count %}<small><a class="btn" href="{% url blog slug=row.slug %}#comments">{{ comment_count }} Comments</a></small>{% endif %}
       {% if user.is_authenticated %}<small><a class="btn" href="{% url blog slug=row.slug %}#comment_form">Add Comment</a></small>{% endif %}
-      <small><a class="btn" href="#">{% if row.author.first_name or row.author.last_name %}{{ row.author.first_name }} {{ row.author.last_name }}{% else %}{{ row.author.username }}{% endif %} blog</a></small>
+      <small><a class="btn" href="#">{% if row.user.get_full_name %}{{ row.user.get_full_name }}{% else %}{{ row.user.username }}{% endif %} blogs</a></small>
   </div>
 </div>
 {% endfor %}

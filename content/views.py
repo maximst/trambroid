@@ -13,7 +13,7 @@ def blog_detail(request, slug):
 
 
 def blog_list(request):
-    contents = Blog.objects.all()
+    contents = Blog.objects.all().order_by('-create_time')
     paginator = Paginator(contents, 30)
     print request.META['PATH_INFO']
     page = request.GET.get('p')
