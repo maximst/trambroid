@@ -2,14 +2,31 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import Http404
 
 from models import Blog, Comment
 from forms import CommentForm
 
 def blog_detail(request, slug):
     user = request.user
+    
+    SLUGS = [
+        'slug',
+        'drupal_slug',
+        'nid',
+        'id',
+    ]
 
-    content = get_object_or_404(Blog, slug=slug)
+    for slug_name in SLUGS:
+        try:
+            if 'id' not in slug_name or slug.isdigit():
+                content = Blog.objects.get(**{slug_name: slug})
+                break
+        except Blog.DoesNotExist:
+            continue
+    else:
+        raise Http404
+       
     comments = Comment.objects.filter(blog=content).order_by('-create_time')
     contents = {'content': content, 'comments': comments}
     contents.update(csrf(request))
