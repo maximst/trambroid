@@ -1,7 +1,9 @@
 import hashlib
 
-# The functions password_base64_encode,password_get_count_log2
-# and check_password just copied from Drupal.
+'''
+The functions password_base64_encode,password_get_count_log2
+and check_password just copied from Drupal.
+'''
 
 itoa64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
