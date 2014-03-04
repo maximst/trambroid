@@ -3,7 +3,10 @@ South
 django-voting
 django-taggit
 pytz
-PIL
+#PIL
+Pillow
 django-hvad
 django-social-auth
 django-coffeescript
+BeautifulSoup
+supercaptcha

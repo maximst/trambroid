@@ -19,3 +19,9 @@ class DrupalUser(models.Model):
     data = models.TextField(blank=True)
     class Meta:
         db_table = u'users'
+
+    def save(self):
+        raise NotImplementedError
+
+    def __unicode__(self):
+        return self.name

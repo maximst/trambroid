@@ -14,11 +14,9 @@ class UserProfile(models.Model):
     stupidity_level = models.SmallIntegerField(max_length=1, default=0,
                                             choices=settings.STUPIDITY_LEVELS)
     signature = models.CharField(max_length=255, blank=True,
-                                      default=('<img alt="" '
-                                      'src="http://www.trambroid.com'
-                                      '/files/userbar.png" />'))
+                                default=('<img alt="" src="http://www.trambroid.com/files/userbar.png" />'))
     timezone = models.CharField(max_length=32, default='Europe/Kiev',
-                                  choices=zip(all_timezones, all_timezones))
+                                choices=zip(all_timezones, all_timezones))
 
     def __unicode__(self):
         if self.user.get_full_name():
@@ -35,8 +33,4 @@ def user_post_save(sender, **kwargs):
     user = kwargs.get('instance', None)
     # raw is used when loaddata is running
     if (kwargs.get('created', True) and not kwargs.get('raw', False)):
-        try:
-            uprof = UserProfile.objects.get(user=user)
-        except UserProfile.DoesNotExist:
-            uprof = UserProfile(user=user)
-            uprof.save()
+        UserProfile.objects.get_or_create(user=user)
