@@ -1,2 +1,1 @@
-Django==1.7.1
 django-widgy==0.3.2
