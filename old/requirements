@@ -1,0 +1,12 @@
+Django
+South
+django-voting
+django-taggit
+pytz
+#PIL
+Pillow
+django-hvad
+django-social-auth
+django-coffeescript
+BeautifulSoup
+supercaptcha
