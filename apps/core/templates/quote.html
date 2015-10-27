@@ -1,0 +1,14 @@
+{% load i18n %}
+{% if comment %}
+<a href="#comment_{{ comment }}">
+    <blockquote class="muted">
+        {% if author %}<div class="alert-info">{{ author }} {% trans "wrote" %}:</div>{% endif %}
+        {{ quote_body|safe }}
+    </blockquote>
+</a>
+{% else %}
+<blockquote class="muted">
+    {% if author %}<div class="alert-info">{{ author }} {% trans "wrote" %}:</div>{% endif %}
+    {{ quote_body|safe }}
+</blockquote>
+{% endif %}

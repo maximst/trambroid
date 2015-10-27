@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load static %}
+{% load coretags %}
+{% load mptt_tags %}
+{% load i18n %}
+
+{% block content %}
+    <div class="blog-detail content-detail">
+      <div class="blog-detail-header content-detail-header">
+        <h4>{{ content.title }}</h4>
+      </div>
+      <div class="blog-detail-body content-detail-body">
+        <div class="blog-author content-author">
+            Posted by 
+            {% if content.user.first_name or content.user.last_name %}
+              {{ content.user.get_full_name }}
+            {% else %}
+              {{ content.user.username }}
+            {% endif %}
+            on {{ content.create_time }}
+        </div>
+        {% vote %}
+        <div class="blog-detail-body-content content-detail-body-content">
+          {% if user.is_superuser or content.drupal_nid %}
+            {{ content.body|safe }}
+          {% else %}
+            {{ content.body|striptags|linebreaks }}
+          {% endif %}
+        </div>
+        <div class="blog-detail-footer content-detail-footer">
+          {% if content.tags.exists %}
+            <span class="float-left">
+            <small>
+              Tags:
+              {% for t in content.get_tags %}
+                <a href="/tag/{{ t.slug }}">{{ t.name }}</a>{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </small>
+            </span>
+          {% endif %}
+            <div class="btn-group">
+              {% comment %}{% if user.is_authenticated %}{% endcomment %}
+                <a class="btn" href="#comment_form">{% trans "Добавить коментарий" %}</a>
+              {% comment %}{% endif %}{% endcomment %}
+              {% comment %}        <small><a class="btn" href="#">{% if content.user.first_name or content.user.last_name %}{{ content.user.first_name }} {{ content.user.last_name }}{% else %}{{ content.user.username }}{% endif %} blog</a></small>{% endcomment %}
+            </div>
+        </div>
+      </div>
+    <a name="comments"></a>
+    <ul class="list-unstyled unstyled">
+    {% recursetree content.get_comments %}
+      <li>
+        <div class="comment" id="comment_{{ node.pk }}">
+            <div class="comment-header">
+            {{ node.create_time }}. Posted by <a href="#">{% if  node.user.first_name or node.user.last_name %}{{ node.user.get_full_name }}{% else %}{{ node.user.username }}{% endif %}</a>
+            <span class="float-right">
+                <a href="#comment_form" onclick="return false;" data-comment-quote data-quoted-comment-id="{{node.pk}}" data-author="{% if  node.user.first_name or node.user.last_name %}{{ node.user.get_full_name }}{% else %}{{ node.user.username }}{% endif %}">{% trans "Цитировать" %}</a>
+                <a href="#comment_{{ node.pk }}">#{{node.pk}}</a>
+                <!--{{ node.language }}-->
+            </span>
+            </div>
+            <div class="float-left user-avatar">
+                <div class="avatar-wrapper">
+                  {% if node.user %}
+                    {% if node.user.avatar %}
+                        <img src="{{ node.user.avatar.url }}" />
+                    {% else %}
+                        <img src="{% get_static_prefix %}img/default_avatar.png" />
+                    {% endif %}
+                  {% else %}
+                    <img src="{% get_static_prefix %}img/amazing_horse.png" />
+                  {% endif %}
+                    <div class="avatar-shadow"></div>
+                </div>
+            </div>
+            <div class="comment-wrapper">
+            <div class="comment-body" data-comment-body="{{ node.pk }}">
+                {{ node.full_body|striptags|quoted_text|safe }}
+            </div>
+            {% if node.user.signature %}
+            <div class="comment-footer">
+                {% if node.user.is_superuser or node.user.is_staff or node.user.drupal_uid %}{{ node.user.signature|safe }}{% else %}{{ node.user.signature|striptags }}{% endif %}
+            </div>
+            {% endif %}
+            </div>
+        </div>
+        <ul class="children list-unstyled unstyled">
+            {{ children }}
+        </ul>
+      </li>
+    {% endrecursetree %}
+    </ul>
+
+    <a name="comment_form"></a>
+    <br>
+    {% if user.is_authenticated %}
+      <div class="add-comment">
+        <form method="post" action="">
+          {{ comment_form.as_p }}
+          {% csrf_token %}
+          <div class="text-left">
+            <input type="submit" class="btn" value="{% trans "Отправить" %}"></input>
+          </div>
+        </form>
+      </div>
+    {% else %}
+      {% trans "Пожалуйста" %} <a href="{% url "core:login" %}?next={{ request.META.PATH_INFO }}">{% trans "войдите" %}</a>, {% trans "что-бы оставить коментарий" %}.
+      <br />
+      {% trans "Нет акаунта?" %} <a href="{% url "registration_register" %}?next={{ request.META.PATH_INFO }}">{% trans "Регистрация" %}</a>
+    {% endif %}
+    </div>
+{% endblock %}
+

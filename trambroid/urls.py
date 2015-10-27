@@ -1,22 +1,41 @@
-from django.conf.urls import patterns, include, url
+"""trambroid URL Configuration
 
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/1.8/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Add an import:  from blog import urls as blog_urls
+    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
+"""
+from django.conf.urls import include, url
+from django.conf import settings
 from django.contrib import admin
-admin.autodiscover()
+from django.contrib.auth.views import login
 
-from apps.core.widgy_site import site as widgy_site
+from apps.content.views import blog_list
+from apps.core.views import vote, logout, profile
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'apps.core.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
 
-    url(r'^$', 'mezzanine.pages.views.page', {'slug': '/'}, name='home'),
-
+urlpatterns = [
+    url(r'^$', blog_list, name='home'),
+    url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
-    # widgy admin
-    url(r'^admin/widgy/', include(widgy_site.urls)),
-    # widgy frontend
-    url(r'^widgy/', include('widgy.contrib.widgy_mezzanine.urls')),
-    url(r'^', include('mezzanine.urls')),
-)
+    url(r'', include('apps.content.urls', namespace='content')),
+
+    url(r'', include('apps.core.urls', namespace='core')),
+
+    url(r'', include('apps.user_profile.urls', namespace='profile')),
+
+    url('', include('social.apps.django_app.urls', namespace='social'))
+]
+
+if settings.DEBUG:
+    urlpatterns.append(url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+                       {'document_root': settings.MEDIA_ROOT}))

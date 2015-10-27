@@ -1,0 +1,63 @@
+{% load static %}
+{% load i18n %}
+
+{% get_available_languages as LANGUAGES %}
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">TRAMBROID</a>
+      <!--ul class="nav dropdown">
+        <li data-toggle="dropdown">
+            <a class="dropdown-toggle" role="button" data-target="#" href="#">
+                Navigation
+                <b class="caret"></b>
+            </a>
+        </li>
+        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+          {% for section in sections %}
+            <li {% if section.slug == current_section %}class="active"{% endif %}><a href="{{ section.url }}">{{ section.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </ul-->
+      <span class="float-right">
+        <ul class="nav dropdown">
+          {% for lang in LANGUAGES %}
+            <li>
+                <a href="{% url "core:set-language" lang.0 %}"{% if lang.0 == request.LANGUAGE_CODE %} class="bold"{% endif %}>
+                    {{ lang.0|language_name_local }}
+                </a>
+            </li>
+          {% endfor %}
+          {% if user.is_authenticated %}
+            <li data-toggle="dropdown">
+                <a class="dropdown-toggle" role="button" data-target="#" href="#">
+                    {{ user }}
+                    <b class="caret"></b>
+                </a>
+            </li>
+            <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+                  {% if user.is_superuser %}
+                    <li><a href="{% url "admin:index" %}">{% trans "Admin" %}</a></li>
+                  {% endif %}
+                    <li><a href="{% url "profile:profile" 'profile' %}">{% trans "My profile" %}</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{% url "core:logout" %}">{% trans "Logout" %}</a></li>
+            </ul>
+          {% else %}
+<!--            <li>
+                <a href="{% url "social:begin" 'facebook' %}?next={{ request.META.PATH_INFO }}" class="facebook" title="Login via facebook">
+                    FB
+                </a>
+            </li>-->
+            <li>
+                <a href="{% url "core:login" %}?next={{ request.META.PATH_INFO }}">
+                    {% trans "Login" %}
+                </a>
+            </li>
+          {% endif %}
+        </ul>
+      </span>
+    </div>
+  </div>
+</div>

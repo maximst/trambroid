@@ -1,1 +1,14 @@
-django-widgy==0.3.2
+Django
+-e git+https://github.com/Marx86/django-voting.git#egg=django-voting
+django-taggit
+django-mptt
+pytz
+Pillow
+django-hvad
+python-social-auth
+django-coffeescript
+BeautifulSoup
+-e git+https://github.com/Marx86/supercaptcha.git#egg=supercaptcha
+django-imagekit
+psycopg2
+django-registration-redux

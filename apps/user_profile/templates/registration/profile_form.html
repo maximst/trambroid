@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+{% if form %}
+
+<form method="post" enctype="multipart/form-data" action="" class="form-horizontal profile">
+{% csrf_token %}
+    <div class="avatar">
+        <div class="float-left user-avatar profile">
+            <div class="avatar-wrapper">
+            {% if form.instance.avatar %}
+                <img id="profile-avatar" src="{{ form.instance.avatar.url }}" />
+            {% else %}
+                <img id="profile-avatar" src="{% get_static_prefix %}img/default_avatar.png" />
+            {% endif %}
+                <div class="avatar-shadow"></div>
+            </div>
+        </div>
+        {{ form.avatar }}
+    </div>
+  {% for field in form %}
+    {% if field.name != 'password' and field.name != 'avatar' %}
+    <div class="control-group">
+        <div class="control-label">{{ field.label_tag }}</div>
+        <div class="controls">
+            {{ field }}
+          {% if field.help_text %}
+            <div class="text-small muted">{{ field.help_text }}</div>
+          {% endif %}
+          {% if field.errors %}
+            <ul class="text-error unstyled text-medium">
+              {% for error in field.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+    <div class="control-group">
+        <div class="controls">
+            <input type="submit" value="{% trans "Сохранить" %}" class="clearfix" />
+        </div>
+    </div>
+</form>
+
+{% else %}
+
+    <div class="avatar">
+        <div class="float-left user-avatar profile">
+            <div class="avatar-wrapper">
+            {% if profile_user.avatar %}
+                <img id="profile-avatar" src="{{ profile_user.avatar.url }}" />
+            {% else %}
+                <img id="profile-avatar" src="{% get_static_prefix %}img/default_avatar.png" />
+            {% endif %}
+                <div class="avatar-shadow"></div>
+            </div>
+        </div>
+        <h3>{{ profile_user }}</h3>
+        <table class="profile-attrs table-striped">
+            <tr><td>{% trans "Timezone" %}: </td><td>{{ profile_user.timezone }}</td></tr>
+            <tr><td>{% trans "Language" %}: </td><td>{{ profile_user.language }}</td></tr>
+            <tr><td>{% trans "Stupidity level" %}: </td><td>{{ profile_user.stupidity_level }}</td></tr>
+            <tr><td>{% trans "Signature" %}: </td><td>{{ profile_user.signature|safe }}</td></tr>
+        </table>
+    </div>
+
+{% endif %}
+
+{% endblock %}

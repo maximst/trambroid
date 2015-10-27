@@ -1,8 +1,5 @@
-*.log
-*.pot
+*.mo
 *.pyc
-*.py~
+media/*
+COFFEESCRIPT_CACHE
 local_settings.py
-settings_local.py
-.directory
-*~

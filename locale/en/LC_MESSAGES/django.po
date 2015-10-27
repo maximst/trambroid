@@ -1,0 +1,184 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-27 16:15+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/content/templates/blog/blog_detail.html:44
+msgid "Добавить коментарий"
+msgstr "Add comment"
+
+#: apps/content/templates/blog/blog_detail.html:60
+msgid "Цитировать"
+msgstr "Quote"
+
+#: apps/content/templates/blog/blog_detail.html:105
+msgid "Отправить"
+msgstr ""
+
+#: apps/content/templates/blog/blog_detail.html:110
+msgid "Пожалуйста"
+msgstr "Please"
+
+#: apps/content/templates/blog/blog_detail.html:110
+msgid "войдите"
+msgstr "login"
+
+#: apps/content/templates/blog/blog_detail.html:110
+msgid "что-бы оставить коментарий"
+msgstr "to add a comment"
+
+#: apps/content/templates/blog/blog_detail.html:112
+#: apps/user_profile/templates/registration/login.html:30
+msgid "Нет акаунта?"
+msgstr "Do not have an account?"
+
+#: apps/content/templates/blog/blog_detail.html:112
+#: apps/user_profile/templates/registration/login.html:30
+msgid "Регистрация"
+msgstr "Registration"
+
+#: apps/content/templates/blog/blog_list.html:32
+msgid "Read more"
+msgstr ""
+
+#: apps/content/templates/blog/blog_list.html:35
+#, python-format
+msgid "%(count)s Коментарий"
+msgid_plural "%(count)s Коментариев"
+msgstr[0] "%(count)s Comment"
+msgstr[1] "%(count)s Comments"
+
+#: apps/content/templates/blog/blog_list.html:41
+msgid "Add Comment"
+msgstr ""
+
+#: apps/core/templates/base.html:32
+msgid "ТУТА ЕЩЕ ЧЕНИТЬ ВЛЕПИМ."
+msgstr "WE ARE YET SOMETHING INSERT HERE"
+
+#: apps/core/templates/base.html:35
+msgid "Навигация"
+msgstr "Navigation"
+
+#: apps/core/templates/base.html:43
+msgid "Последние коментарии"
+msgstr "Last comments"
+
+#: apps/core/templates/menubar.html:41
+msgid "Admin"
+msgstr ""
+
+#: apps/core/templates/menubar.html:43
+msgid "My profile"
+msgstr ""
+
+#: apps/core/templates/menubar.html:45
+msgid "Logout"
+msgstr ""
+
+#: apps/core/templates/menubar.html:55
+#: apps/user_profile/templates/registration/login.html:23
+msgid "Login"
+msgstr ""
+
+#: apps/core/templates/paginator.html:6
+msgid "Пред."
+msgstr "Prev."
+
+#: apps/core/templates/paginator.html:34
+msgid "След."
+msgstr "Next."
+
+#: apps/core/templates/quote.html:5 apps/core/templates/quote.html.py:11
+msgid "wrote"
+msgstr ""
+
+#: apps/core/templates/vote.html:16
+msgid "SUCCESS"
+msgstr ""
+
+#: apps/core/templates/vote.html:16
+msgid "Your vote is considered!"
+msgstr ""
+
+#: apps/user_profile/forms.py:19
+msgid "Имя"
+msgstr "First name"
+
+#: apps/user_profile/forms.py:20
+msgid "Фамилия"
+msgstr "Last name"
+
+#: apps/user_profile/forms.py:21
+msgid "Язык"
+msgstr "Language"
+
+#: apps/user_profile/forms.py:24
+msgid "Временная зона"
+msgstr "Timezone"
+
+#: apps/user_profile/forms.py:26
+msgid "Аватар"
+msgstr "Picture"
+
+#: apps/user_profile/forms.py:28
+msgid "Подпись"
+msgstr "Signature"
+
+#: apps/user_profile/forms.py:29
+msgid "Уровень глупости"
+msgstr "Stupidtly level"
+
+#: apps/user_profile/forms.py:56
+msgid "Delete"
+msgstr ""
+
+#: apps/user_profile/templates/registration/login.html:7
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: apps/user_profile/templates/registration/login.html:32
+msgid "Или войдите через соцсети"
+msgstr "Or sign in via social networks"
+
+#: apps/user_profile/templates/registration/profile_form.html:45
+msgid "Сохранить"
+msgstr "Save"
+
+#: apps/user_profile/templates/registration/profile_form.html:65
+msgid "Timezone"
+msgstr ""
+
+#: apps/user_profile/templates/registration/profile_form.html:66
+msgid "Language"
+msgstr ""
+
+#: apps/user_profile/templates/registration/profile_form.html:67
+msgid "Stupidity level"
+msgstr ""
+
+#: apps/user_profile/templates/registration/profile_form.html:68
+msgid "Signature"
+msgstr ""
+
+#: apps/user_profile/templates/registration/registration_form.html:26
+msgid "Зарегистрироваться"
+msgstr "Registration"
+
+#: trambroid/settings.py:155
+msgid "Blogs"
+msgstr ""

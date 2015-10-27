@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<form method="post" enctype="multipart/form-data" action="" class="form-horizontal">
+{% csrf_token %}
+  {% for field in form %}
+    <div class="control-group">
+        <div class="control-label">{{ field.label_tag }}</div>
+        <div class="controls">
+            {{ field }}
+          {% if field.help_text %}
+            <div class="text-small muted">{{ field.help_text }}</div>
+          {% endif %}
+          {% if field.errors %}
+            <ul class="text-error unstyled text-medium">
+              {% for error in field.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+    </div>
+  {% endfor %}
+    <div class="control-group">
+        <div class="controls">
+            <input type="submit" value="{% trans "Зарегистрироваться" %}" class="clearfix" />
+        </div>
+    </div>
+</form>
+{% endblock %}

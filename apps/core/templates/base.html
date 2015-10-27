@@ -1,0 +1,61 @@
+{% load static %}
+{% load coretags %}
+{% load coffeescript %}
+{% load i18n %}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+    <title>TRAMBROID{{ page_title }}</title>
+    <link rel="author" title="Maxim Starodubcev">
+    <script type="text/javascript" src="{% get_static_prefix %}js/jquery.js"></script>
+    <script type="text/javascript" src="{% get_static_prefix %}js/bootstrap.min.js"></script>
+<!--    <script type="text/javascript" src="{% get_static_prefix %}js/ajax.js"></script>-->
+    <script type="text/javascript" src="{% get_static_prefix %}{% coffeescript 'coffee/ajax.coffee' %}"></script>
+    <script type="text/javascript" src="{% get_static_prefix %}{% coffeescript 'coffee/comment.coffee' %}"></script>
+    <script type="text/javascript" src="{% get_static_prefix %}{% coffeescript 'coffee/profile.coffee' %}"></script>
+    <link rel="stylesheet" href="{% get_static_prefix %}css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="{% get_static_prefix %}css/bootstrap-responsive.min.css" type="text/css"/>
+    <link rel="stylesheet" href="{% get_static_prefix %}css/style.css" type="text/css"/>
+</head>
+
+<body data-offset-top="50">
+
+{% menubar %}
+
+<div class="container-fluid">
+  <div class="row-fluid content">
+    <div class="span2">
+      <div id="most_important">
+          {% trans "ТУТА ЕЩЕ ЧЕНИТЬ ВЛЕПИМ." %}
+      </div>
+      <div class="menu left-block">
+        <h5>{% trans "Навигация" %}</h5>
+        <ul class="nav nav-list">
+          {% for section in sections %}
+            <li {% if section == current_section %}class="active"{% endif %}><a href="{{ section.url }}">{{ section.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="menu left-block">
+        <h5>{% trans "Последние коментарии" %}</h5>
+        <ul class="nav nav-list">
+          {% for comment in last_comments %}
+            <li><a href="{% url "content:detail" comment.blog.slug %}#comment_{{comment.id}}">{% if comment.title %}{{ comment.title }}{% else %}{{ comment.body_only|striptags|truncatewords:5 }}{% endif %}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="span10 block-center">
+      {% breadcrump %}
+      {% include "paginator.html" %}
+      {% block content %}{% endblock %}
+      {% include "paginator.html" %}
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
