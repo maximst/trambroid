@@ -28,6 +28,10 @@ cursor = db.cursor()
 
 #cursor.execute('SET NAMES "utf8"')
 
+def udecode(string, coding):
+    if type(string) != unicode:
+        return unicode(string, coding)
+    return string
 
 #BEGIN export users
 all_users = User.objects.all()
@@ -78,15 +82,15 @@ for row in users:
     print row
 
     us = User.objects.get_or_create(
-        username=unicode(row[1], 'utf8')[:30],
+        username=udecode(row[1], 'utf8')[:30],
         defaults={
             'avatar': avatar,
-            'timezone': unicode(tz, 'utf8'),
-            'signature': unicode(row[3], 'utf8'),
-            'language': unicode(row[7] or 'ru', 'utf8'),
-            'first_name': unicode(fname, 'utf8')[:30],
-            'last_name': unicode(lname, 'utf8')[:30],
-            'email': unicode(row[2], 'utf8')[:75],
+            'timezone': udecode(tz, 'utf8'),
+            'signature': udecode(row[3], 'utf8'),
+            'language': udecode(row[7] or 'ru', 'utf8'),
+            'first_name': udecode(fname, 'utf8')[:30],
+            'last_name': udecode(lname, 'utf8')[:30],
+            'email': udecode(row[2], 'utf8')[:75],
             'drupal_uid': row[0],
             'drupal_password': row[8],
             'is_staff': (row[0] == 1),
@@ -141,7 +145,7 @@ def save(result):
         except:
             drupal_slug = ''
 
-        slug = slugify(unidecode(unicode(row[2], 'utf8')))
+        slug = slugify(unidecode(udecode(row[2], 'utf8')))
         if Blog.objects.filter(slug=slug).exists():
             slug += '-{}'.format(hex(random.randint(0, 65535))[2:].rjust(4, '0'))
 
@@ -155,12 +159,12 @@ def save(result):
         if row[6] is None:
             body = u''
         else:
-            body = unicode(row[6], 'utf8')
+            body = udecode(row[6], 'utf8')
             if row[11] not in ('full_html', 'filtered_html', 'video_filter', 'php_code'):
                 body = body.replace('\n', '\n<br />\n')
 
         if row[7]:
-            preview = unicode(row[7], 'utf8')
+            preview = udecode(row[7], 'utf8')
         else:
             for dtr in (u'<!--break-->', u'<!-- break -->'):
                 try:
@@ -178,16 +182,16 @@ def save(result):
         bl = Blog.objects.language(lang).get_or_create(
             drupal_nid=row[0],
             defaults={
-                'name': u'drupal/node/{} - {}'.format(row[0], unicode(title, 'utf8')),
-                'title': unicode(title, 'utf8'),
+                'name': u'drupal/node/{} - {}'.format(row[0], udecode(title, 'utf8')),
+                'title': udecode(title, 'utf8'),
                 'user': usr,
                 'create_time': datetime.fromtimestamp(row[4]),
                 'edit_time': datetime.fromtimestamp(row[5]),
                 'body': body,
                 'preview': preview,
                 'slug': slug,
-                'drupal_slug': unicode(drupal_slug, 'utf8'),
-                'drupal_type': unicode(row[8], 'utf8'),
+                'drupal_slug': udecode(drupal_slug, 'utf8'),
+                'drupal_type': udecode(row[8], 'utf8'),
                 'front_page': bool(row[9]),
                 'on_top': bool(row[10]),
                 'is_active': bool(row[12])
@@ -237,12 +241,12 @@ for row in cursor.fetchall():
     if row[8] in ('plain_text', 'anonimous_comment'):
         body = removetags(row[7], 'a')
     else:
-        body = unicode(row[7], 'utf8')
+        body = udecode(row[7], 'utf8')
 
     if row[10] == 'und':
         lang = u'ru'
     else:
-        lang = unicode(row[10], 'utf8')
+        lang = udecode(row[10], 'utf8')
 
     r = re.compile((r'(?P<quote><\s*div[^>]+class\s*=\s*(?:"|\')?\s*quote\s*(?:"|\')?[^>]*>'
         r'(?P<quote_body_all>[^<]*(?:<\s*div[^>]+class\s*=\s*(?:"|\')?\s*quotp-author\s*(?:"|\')?[^>]*>)?'
@@ -276,7 +280,7 @@ for row in cursor.fetchall():
             body = body.replace(quote, new_quote)
 
     comment = Comment.objects.create(
-        title=unicode(row[3], 'utf8'),
+        title=udecode(row[3], 'utf8'),
         body=body,
         user=usr,
         create_time=datetime.fromtimestamp(row[4]),
@@ -341,10 +345,10 @@ for row in cursor.fetchall():
     forum, created = Forum.objects.get_or_create(
         tid=int(row[2] or '0'),
         defaults={
-            'name': unicode(row[3] or '', 'utf-8'),
-            'description': unicode(row[4] or '', 'utf-8'),
+            'name': udecode(row[3] or '', 'utf-8'),
+            'description': udecode(row[4] or '', 'utf-8'),
             'weight': int(row[5] or '0'),
-            'url': unicode(row[6] or '', 'utf-8')
+            'url': udecode(row[6] or '', 'utf-8')
         }
     )
 
