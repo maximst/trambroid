@@ -11,6 +11,8 @@ from voting.models import Vote
 from apps.content.models import Blog
 
 import re
+import urllib
+import urllib2
 
 register = template.Library()
 
@@ -113,3 +115,30 @@ def rupluralize(value, arg):
         raise template.TemplateSyntaxError
     return ''
 rupluralize.is_safe = False
+
+@register.simple_tag(takes_context=True)
+def setlinks(context):
+    request = context['request']
+    url = request.META.get('PATH_INFO', '')
+    query_string = request.META.get('QUERY_STRING')
+    if query_string:
+        url += '?%s' % query_string
+
+
+    setlinks_querystring = urllib.urlencode({
+        'host': 'trambroid.com',
+        'start': '1',
+        'count': '20',
+        'p': '6d6e10342d591fd102032427afb42eca',
+        'uri': url,
+    })
+    setlinks_url = 'http://show.setlinks.ru/page.php?%s' % setlinks_querystring
+
+    try:
+        result = urllib2.urlopen(setlinks_url, timeout=5)
+    except:
+        return None
+    else:
+        if result.code == 200:
+            return result.read()
+    return None

@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'mptt',
     'imagekit',
     'registration',
+    'linkexchange_django',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -85,7 +86,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.i18n',
-                'apps.content.context_processors.last_comments'
+                'apps.content.context_processors.last_comments',
+                'linkexchange_django.context_processors.linkexchange'
             ],
         },
     },
@@ -191,6 +193,8 @@ QUOTE_REGEX = (
     r'(?P<quote_body>(?:(?!(?P=tag_open)\s*\/\s*quote\s*(?P=tag_close)).)*)'
     r'(?P=tag_open)\s*\/\s*quote\s*(?P=tag_close)\s*\n?)'
 )
+
+LINKEXCHANGE_CONFIG = os.path.join(BASE_DIR, 'trambroid', 'linkexchange.cfg')
 
 try:
     from local_settings import *

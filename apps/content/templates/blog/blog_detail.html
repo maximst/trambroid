@@ -3,6 +3,7 @@
 {% load coretags %}
 {% load mptt_tags %}
 {% load i18n %}
+{% load linkexchange_tags %}
 
 {% block content %}
     <div class="blog-detail content-detail">
@@ -21,11 +22,13 @@
         </div>
         {% vote %}
         <div class="blog-detail-body-content content-detail-body-content">
+        {% linkexchange_filter request %}
           {% if user.is_superuser or content.drupal_nid %}
             {{ content.body|safe }}
           {% else %}
             {{ content.body|striptags|linebreaks }}
           {% endif %}
+        {% endlinkexchange_filter %}
         </div>
         <div class="blog-detail-footer content-detail-footer">
           {% if content.tags.exists %}
