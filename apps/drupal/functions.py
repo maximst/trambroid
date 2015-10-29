@@ -51,7 +51,8 @@ def check_password(password, pass_hash):
                             password).encode('utf-8')).digest()
 
     for i in count:
-        hash_tmp = hashlib.sha512('{}{}'.format(hash_tmp, password)).digest()
+        hash_tmp = hashlib.sha512('{}{}'.format(hash_tmp,
+                            password.encode('utf-8'))).digest()
 
     strlen = len(hash_tmp)
     check_hash = setting + password_base64_encode(hash_tmp, strlen)
