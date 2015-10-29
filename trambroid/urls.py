@@ -33,6 +33,8 @@ urlpatterns = [
 
     url(r'', include('apps.user_profile.urls', namespace='profile')),
 
+    url(r'', include('apps.drupal.urls', namespace='forum')),
+
     url('', include('social.apps.django_app.urls', namespace='social'))
 ]
 

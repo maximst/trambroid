@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% load coretags %}
+{% load mptt_tags %}
+{% load i18n %}
+
+{% block content %}
+    <ul class="root list-unstyled unstyled forum">
+    {% recursetree forums %}
+      <li>
+        <div class="comment">
+            <a href="/{{ node.url }}">{{ node.name }}</a>
+            <br />
+            <small>{{ node.description|safe }}
+            {% trans "Темы" %}: {{ node.blogs_count }}</small>
+        </div>
+        {% if not node.is_leaf_node %}
+        <ul class="children list-unstyled unstyled">
+            {{ children }}
+        </ul>
+        {% endif %}
+      </li>
+    {% endrecursetree %}
+    </ul>
+    {% for row in parent_forum.get_blogs %}
+    <div id="preview-{{ row.id }}" class="fp-list blog-list content-list">
+        <div class="blog-list-header content-list-header">
+            <a href="{{ row.get_absolute_url }}" title="Go to: {{ row.title }}"><h4>{{ row.title }}</h4></a>
+        </div>
+        <div class="blog-list-body content-list-body">
+            {% if user.is_superuser or row.drupal_nid %}
+            {{ row.preview|safe }}
+            {% else %}
+            {{ row.preview|striptags|linebreaks }}
+            {% endif %}
+        </div>
+        <div class="blog-list-footer content-list-footer">
+
+            {% if row.translations_cache.tags_count %}
+                <span class="float-left">
+                <small>
+                Tags:
+                {% for t in row.get_tags %}
+                    <a href="/tag/{{ t.slug }}">{{ t.name }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </small>
+                </span>
+            {% endif %}
+
+            <small><a class="btn" href="{{ row.get_absolute_url }}">{% trans "Read more" %}</a></small>
+            {% if row.translations_cache.comment_count %}
+                <small>
+                <a class="btn" href="{{ row.get_absolute_url }}#comments">{% blocktrans count row.translations_cache.comment_count as count %}{{ count }} Коментарий{% plural %}{{ count }} Коментариев{% endblocktrans %}</a>
+                </small>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+                <small>
+                <a class="btn" href="{{ row.get_absolute_url }}#comment_form">{% trans "Add Comment" %}</a>
+                </small>
+            {% endif %}
+
+            <small>
+                <a class="btn" href="#">
+                {% if row.user.get_full_name %}
+                    {{ row.user.get_full_name }}
+                {% else %}
+                    {{ row.user.username }}
+                {% endif %} blogs
+                </a>
+            </small>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

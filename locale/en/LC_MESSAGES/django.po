@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-27 16:15+0200\n"
+"POT-Creation-Date: 2015-10-29 11:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,10 +52,12 @@ msgid "Регистрация"
 msgstr "Registration"
 
 #: apps/content/templates/blog/blog_list.html:32
+#: apps/drupal/templates/forum.html:50
 msgid "Read more"
 msgstr ""
 
 #: apps/content/templates/blog/blog_list.html:35
+#: apps/drupal/templates/forum.html:53
 #, python-format
 msgid "%(count)s Коментарий"
 msgid_plural "%(count)s Коментариев"
@@ -63,6 +65,7 @@ msgstr[0] "%(count)s Comment"
 msgstr[1] "%(count)s Comments"
 
 #: apps/content/templates/blog/blog_list.html:41
+#: apps/drupal/templates/forum.html:59
 msgid "Add Comment"
 msgstr ""
 
@@ -115,6 +118,10 @@ msgstr ""
 msgid "Your vote is considered!"
 msgstr ""
 
+#: apps/drupal/templates/forum.html:15
+msgid "Темы"
+msgstr ""
+
 #: apps/user_profile/forms.py:19
 msgid "Имя"
 msgstr "First name"
@@ -123,11 +130,11 @@ msgstr "First name"
 msgid "Фамилия"
 msgstr "Last name"
 
-#: apps/user_profile/forms.py:21
+#: apps/user_profile/forms.py:21 apps/user_profile/models.py:31
 msgid "Язык"
 msgstr "Language"
 
-#: apps/user_profile/forms.py:24
+#: apps/user_profile/forms.py:24 apps/user_profile/models.py:29
 msgid "Временная зона"
 msgstr "Timezone"
 
@@ -135,11 +142,11 @@ msgstr "Timezone"
 msgid "Аватар"
 msgstr "Picture"
 
-#: apps/user_profile/forms.py:28
+#: apps/user_profile/forms.py:28 apps/user_profile/models.py:26
 msgid "Подпись"
 msgstr "Signature"
 
-#: apps/user_profile/forms.py:29
+#: apps/user_profile/forms.py:29 apps/user_profile/models.py:24
 msgid "Уровень глупости"
 msgstr "Stupidtly level"
 
@@ -181,4 +188,8 @@ msgstr "Registration"
 
 #: trambroid/settings.py:155
 msgid "Blogs"
+msgstr ""
+
+#: trambroid/settings.py:156
+msgid "Forums"
 msgstr ""

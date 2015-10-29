@@ -585,3 +585,30 @@ table.profile-attrs tr td:last-child {
 .nav-list>.active>a, .nav-list>.active>a:hover, .nav-list>.active>a:focus {
     background: #aaa;
 }
+
+.forum li div {
+    padding: 5px;
+    margin: 10px 0px;
+}
+
+.forum li {
+    position: relative;
+}
+
+.forum ul.children {
+    padding-top: 10px;
+    margin-top: -9px;
+    padding-left: 0px;
+    margin-left: 20px !important;
+    border-left: 1px solid #aaa;
+}
+
+.forum li:last-child > ul.children li:last-child ul:last-child::before {
+    content: "";
+    height: 138px;
+    width: 2px;
+    background: #d5d5d5;
+    position: absolute;
+    left: -2px;
+    top: 52px;
+}

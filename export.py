@@ -12,6 +12,7 @@ from django.contrib.auth import get_user_model
 from unidecode import unidecode
 from apps.content.models import Blog, Comment
 from apps.drupal.functions import text_summary
+from apps.drupal.models import Forum
 from django.template.defaultfilters import slugify, removetags
 
 host='localhost'
@@ -152,7 +153,7 @@ def save(result):
         title = row[2]
 
         if row[6] is None:
-            body = ''
+            body = u''
         else:
             body = unicode(row[6], 'utf8')
             if row[11] not in ('full_html', 'filtered_html', 'video_filter', 'php_code'):
@@ -161,7 +162,16 @@ def save(result):
         if row[7]:
             preview = unicode(row[7], 'utf8')
         else:
-            preview = text_summary(body, row[11], 600)
+            for dtr in (u'<!--break-->', u'<!-- break -->'):
+                try:
+                    delimiter = body.index('<!--break-->')
+                except ValueError:
+                    continue
+                else:
+                    preview = body[:delimiter]
+                    break
+            else:
+                preview = u''
 
         print row[8], title
 
@@ -295,3 +305,79 @@ for row in cursor.fetchall():
     comment.save()
 
 #END export comments
+
+
+# BEGIN export forums
+Forum.objects.all().delete()
+
+query = '''
+SELECT
+  forum.nid,
+  forum.vid,
+  taxonomy_term_data.tid,
+  taxonomy_term_data.name,
+  taxonomy_term_data.description,
+  taxonomy_term_data.weight,
+  url_alias.alias
+FROM
+  taxonomy_term_data
+LEFT OUTER JOIN
+  forum
+    ON
+      taxonomy_term_data.tid = forum.tid
+LEFT OUTER JOIN
+  url_alias
+    ON
+      'forum/' || taxonomy_term_data.tid = url_alias.source
+WHERE
+  taxonomy_term_data.vid = 2
+ORDER BY
+  taxonomy_term_data.tid
+'''
+
+cursor.execute(query)
+
+for row in cursor.fetchall():
+    forum, created = Forum.objects.get_or_create(
+        tid=int(row[2] or '0'),
+        defaults={
+            'name': unicode(row[3] or '', 'utf-8'),
+            'description': unicode(row[4] or '', 'utf-8'),
+            'weight': int(row[5] or '0'),
+            'url': unicode(row[6] or '', 'utf-8')
+        }
+    )
+
+    try:
+        blog = Blog.objects.get(drupal_nid=int(row[0] or '0'))
+    except Blog.DoesNotExist:
+        print 'NODE "%s" NOT FOUND!!!!' % row[0]
+    else:
+        forum.blogs.add(blog)
+        forum.save()
+
+    print 'Forum ', forum.id, ' is created'
+
+
+query = '''
+SELECT
+  tid,
+  parent
+FROM
+  taxonomy_term_hierarchy
+'''
+
+cursor.execute(query)
+
+for row in cursor.fetchall():
+    try:
+        forum = Forum.objects.get(tid=row[0])
+        parent = Forum.objects.get(tid=row[1])
+    except Forum.DoesNotExist:
+        pass
+    else:
+        print 'For forum ', forum.id, ' set parent ', parent.id
+        forum.parent = parent
+        forum.save()
+
+# END export forums

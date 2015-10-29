@@ -153,6 +153,7 @@ STUPIDITY_LEVELS = (
 
 MENU_ITEMS = (
     ('content:list', _(u'Blogs')),
+    ('forum:list', _(u'Forums')),
 )
 
 DISPLAY_CONTENT_TYPES = (
