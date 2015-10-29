@@ -612,3 +612,8 @@ table.profile-attrs tr td:last-child {
     left: -2px;
     top: 52px;
 }
+
+ul.linx, ul.linx li {
+    font-size: 0.7em;
+    line-height: 1.3em;
+}
