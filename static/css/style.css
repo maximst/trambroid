@@ -600,10 +600,10 @@ table.profile-attrs tr td:last-child {
     margin-top: -9px;
     padding-left: 0px;
     margin-left: 20px !important;
-    border-left: 1px solid #aaa;
+    border-left: 1px dotted #aaa;
 }
 
-.forum li:last-child > ul.children li:last-child ul:last-child::before {
+.forum li:first-child > ul.children li:last-child ul:last-child::before {
     content: "";
     height: 138px;
     width: 2px;
