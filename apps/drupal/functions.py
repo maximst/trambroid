@@ -47,7 +47,7 @@ def check_password(password, pass_hash):
     count_log2 = password_get_count_log2(setting)
     count = xrange(1, (1 << count_log2) + 1)
     salt = setting[4:16]
-    hash_tmp = hashlib.sha512(salt + password).digest()
+    hash_tmp = hashlib.sha512((salt + password).encode('utf-8')).digest()
 
     for i in count:
         hash_tmp = hashlib.sha512('{}{}'.format(hash_tmp, password)).digest()
