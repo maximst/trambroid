@@ -166,16 +166,7 @@ def save(result):
         if row[7]:
             preview = udecode(row[7], 'utf8')
         else:
-            for dtr in (u'<!--break-->', u'<!-- break -->'):
-                try:
-                    delimiter = body.index('<!--break-->')
-                except ValueError:
-                    continue
-                else:
-                    preview = body[:delimiter]
-                    break
-            else:
-                preview = u''
+            preview = text_summary(body, row[11], 600)
 
         print row[8], title
 

@@ -77,15 +77,18 @@ def _str_reverse(string):
 
 def text_summary(text, text_format=None, size=None):
     # Find where the delimiter is in the body
-    try:
-        delimiter = text.index('<!--break-->')
-    except ValueError:
+    for dtr in ('<!--break-->', '<!-- break -->', '<! -- break -->'):
+        try:
+            delimiter = text.index(dtr)
+        except ValueError:
+            continue
+        else:
+            # If a valid delimiter has been specified, use it to chop off the summary.
+            return text[:delimiter]
+    else:
         # If the size is zero, and there is no delimiter, the entire body is the summary.
         if size == 0:
             return text
-    else:
-        # If a valid delimiter has been specified, use it to chop off the summary.
-        return text[:delimiter]
 
     # We check for the presence of the PHP evaluator filter in the current
     # format. If the body contains PHP code, we do not split it up to prevent
