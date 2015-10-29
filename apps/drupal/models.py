@@ -12,7 +12,7 @@ class Forum(models.Model):
     description = models.TextField()
     weight = models.IntegerField(default=0, blank=True)
     language = models.CharField(max_length=5, default='ru', choices=settings.LANGUAGES)
-    parent = mptt.fields.TreeForeignKey('self', null=True, blank=True, related_name='child')
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='child')
     blogs = models.ManyToManyField('content.Blog')
     tid = models.IntegerField(default=0, blank=True)
     url = models.CharField(max_length=255, null=True, default=None)

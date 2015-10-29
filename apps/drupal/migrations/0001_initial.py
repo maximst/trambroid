@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('content', '0002_blog_in_menu'),
+        ('content', '0001_initial'),
     ]
 
     operations = [
@@ -19,6 +19,8 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('weight', models.IntegerField(default=0, blank=True)),
                 ('language', models.CharField(default=b'ru', max_length=5, choices=[(b'ru', '\u0420\u0443\u0441\u0441\u043a\u0438\u0439'), (b'en', 'English')])),
+                ('tid', models.IntegerField(default=0, blank=True)),
+                ('url', models.CharField(default=None, max_length=255, null=True)),
                 ('lft', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('rght', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('tree_id', models.PositiveIntegerField(editable=False, db_index=True)),

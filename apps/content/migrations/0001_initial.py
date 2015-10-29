@@ -2,15 +2,11 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from django.conf import settings
-import taggit.managers
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('taggit', '0002_auto_20150616_2121'),
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -29,8 +25,7 @@ class Migration(migrations.Migration):
                 ('drupal_nid', models.IntegerField(default=0, max_length=10, blank=True)),
                 ('drupal_slug', models.CharField(default=b'', max_length=255, blank=True)),
                 ('drupal_type', models.CharField(default=b'blog', max_length=10, blank=True)),
-                ('tags', taggit.managers.TaggableManager(to='taggit.Tag', through='taggit.TaggedItem', help_text='A comma-separated list of tags.', verbose_name='Tags')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
+                ('in_menu', models.BooleanField(default=False)),
             ],
             options={
                 'abstract': False,
@@ -44,7 +39,6 @@ class Migration(migrations.Migration):
                 ('preview', models.TextField(default=b'', blank=True)),
                 ('body', models.TextField(default=b'')),
                 ('language_code', models.CharField(max_length=15, db_index=True)),
-                ('master', models.ForeignKey(related_name='translations', editable=False, to='content.Blog', null=True)),
             ],
             options={
                 'managed': True,
@@ -70,11 +64,6 @@ class Migration(migrations.Migration):
                 ('level', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('blog', models.ForeignKey(to='content.Blog')),
                 ('parent', models.ForeignKey(related_name='child', blank=True, to='content.Comment', null=True)),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
             ],
-        ),
-        migrations.AlterUniqueTogether(
-            name='blogtranslation',
-            unique_together=set([('language_code', 'master')]),
         ),
     ]
