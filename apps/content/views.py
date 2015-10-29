@@ -56,7 +56,7 @@ def blog_list(request, lang=None, drupal_blogs_alias_url=None, drupal_uid=None):
         blogs = blogs.filter(user__drupal_uid=drupal_uid)
 
     paginator = Paginator(blogs, 30)
-    page = request.GET.get('p')
+    page = request.GET.get('p', request.GET.get('page'))
     try:
         content = paginator.page(page)
     except PageNotAnInteger:
