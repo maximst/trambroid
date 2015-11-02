@@ -1,5 +1,8 @@
 *.mo
 *.pyc
+*.db
 media/*
 COFFEESCRIPT_CACHE
 local_settings.py
+drupal_media
+src

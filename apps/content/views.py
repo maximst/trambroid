@@ -16,6 +16,7 @@ def blog_detail(request, slug, lang='ru', is_drupal=False):
     user = request.user
     lang = request.LANGUAGE_CODE
 
+    qs = Blog.objects.language('all')
     query = {'is_active': True}
     if is_drupal and slug.isdigit():
         query['drupal_nid'] = int(slug)
@@ -23,8 +24,9 @@ def blog_detail(request, slug, lang='ru', is_drupal=False):
         query['drupal_slug'] = slug
     else:
         query['slug'] = slug
+        qs = Blog.objects.language(lang)
 
-    content = get_object_or_404(Blog.objects.language(lang), **query)
+    content = get_object_or_404(qs, **query)
 
     context = {'content': content, 'page_title': ' | %s' % content.title}
     context.update(csrf(request))

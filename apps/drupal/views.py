@@ -12,7 +12,12 @@ def forum(request, path=None, slug=None):
     forum = None
     if slug:
         url = os.path.join(path, slug)
-        forum = get_object_or_404(Forum, url=url)
+
+        try:
+            forum = Forum.objects.get(url=url)
+        except Forum.DoesNotExist:
+	    forum = get_object_or_404(Forum, tid=slug)
+
         qs = qs.filter(Q(parent=forum)|Q(parent__parent=forum))
 
     forums = qs.annotate(blogs_count=Count('blogs')).order_by('width', '-name')

@@ -130,7 +130,7 @@ def setlinks(context):
         'start': '1',
         'count': '20',
         'p': '6d6e10342d591fd102032427afb42eca',
-        'uri': url,
+        'uri': url.encode('utf-8'),
     })
     setlinks_url = 'http://show.setlinks.ru/page.php?%s' % setlinks_querystring
 

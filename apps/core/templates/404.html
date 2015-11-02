@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<!-- Copyright (C) 2011 Maxim Starodubcev <starodubcevmax@gmail.com> -->
+  <script type="text/javascript">
+    function body() {
+      var milsec = Math.floor(Math.random() * (999 - 100 + 1)) + 100;
+      var date = new Date().getTime();
+      text = "type=2000 audit(" + date + "." + milsec + ":1): initialized<br />";
+      console = document.getElementById('console');
+      console.innerHTML = "NET: Registered protocol family 2<br />";
+      setTimeout('console.innerHTML += "IP route cache hash table entries: 131072 (order: 8, 1048576 bytes)<br />"', 300);
+      setTimeout('console.innerHTML += "TCP established hash table entries: 524288 (order: 11, 8388608 bytes)<br />"', 700);
+      setTimeout('console.innerHTML += "TCP bind hash table entries: 65536 (order: 8, 1048576 bytes)<br />"', 900);
+      setTimeout('console.innerHTML += "TCP: Hash tables configured (established 524288 bind 65536)<br />"', 1050);
+      setTimeout('console.innerHTML += "TCP reno registered<br />"', 1255);
+      setTimeout('console.innerHTML += "UDP hash table entries: 2048 (order: 4, 65536 bytes)<br />"', 1260);
+      setTimeout('console.innerHTML += "UDP-Lite hash table entries: 2048 (order: 4, 65536 bytes)<br />"', 1400);
+      setTimeout('console.innerHTML += "NET: Registered protocol family 1<br />"', 1670);
+      setTimeout('console.innerHTML += "Unpacking initramfs...<br />"', 1700);
+      setTimeout('console.innerHTML += "Freeing initrd memory: 2348k freed<br />"', 1810);
+      setTimeout('console.innerHTML += "audit: initializing netlink socket (disabled)<br />"', 1820);
+      setTimeout('console.innerHTML += text', 1840);
+      setTimeout('console.innerHTML += "HugeTLB registered 2 MB page size, pre-allocated 0 pages<br />"', 1980);
+      setTimeout('console.innerHTML += "VFS: Disk quotas dquot_6.5.2<br />"', 2200);
+      setTimeout('console.innerHTML += "<br />"', 2900);
+      setTimeout('console.innerHTML += "Serious system problem!<br />"', 3250);
+      setTimeout('console.innerHTML += "Kernel panic: Stupidity not found.<br />"', 3260);
+      setTimeout('console.innerHTML += "System is rebooted after 10 seconds...<br />"', 3270);
+      setTimeout('console.innerHTML += "Rebooting now!<br />"', 14000);
+    }
+  </script>
+<head>
+  <title>404 Not found</title>
+  <link rel="author" title="Maxim Starodubcev" href="mailto: (author) starodubcevmax@gmail.com">
+  <meta http-equiv="Refresh" content="14; url=/"> 
+</head>
+<body onload="body();">
+<div id="console" style="background: #000; color: #eee; height: 407px; font-size: 16px; font-family: monospace;">
+
+NET: Registered protocol family 2
+IP route cache hash table entries: 131072 (order: 8, 1048576 bytes)
+TCP established hash table entries: 524288 (order: 11, 8388608 bytes)
+TCP bind hash table entries: 65536 (order: 8, 1048576 bytes)
+TCP: Hash tables configured (established 524288 bind 65536)
+TCP reno registered
+UDP hash table entries: 2048 (order: 4, 65536 bytes)
+UDP-Lite hash table entries: 2048 (order: 4, 65536 bytes)
+NET: Registered protocol family 1
+Unpacking initramfs...
+Freeing initrd memory: 2348k freed
+audit: initializing netlink socket (disabled)
+type=2000 audit(1323770738.576:1): initialized
+HugeTLB registered 2 MB page size, pre-allocated 0 pages
+VFS: Disk quotas dquot_6.5.2
+Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+msgmni has been set to 5518
+Block layer SCSI generic (bsg) driver version 0.4 loaded (major 253)
+io scheduler noop registered
+io scheduler deadline registered
+io scheduler cfq registered (default)
+ERST: Table is not found!
+GHES: HEST is not enabled!
+Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+serial8250: ttyS0 at I/O 0x3f8 (irq = 4) is a 16550A
+00:08: ttyS0 at I/O 0x3f8 (irq = 4) is a 16550A
+Linux agpgart interface v0.103
+i8042: PNP: PS/2 Controller [PNP0303:PS2K,PNP0f13:PS2M] at 0x60,0x64 irq 1,12
+serio: i8042 KBD port at 0x60,0x64 irq 1
+serio: i8042 AUX port at 0x60,0x64 irq 12
+mousedev: PS/2 mouse device common for all mice
+rtc_cmos 00:04: RTC can wake from S4
+rtc_cmos 00:04: rtc core: registered rtc_cmos as rtc0
+rtc0: alarms up to one month, 242 bytes nvram, hpet irqs
+cpuidle: using governor ladder
+cpuidle: using governor menu
+TCP cubic registered
+NET: Registered protocol family 17
+Registering the dns_resolver key type
+registered taskstats version 1
+rtc_cmos 00:04: setting system clock to 2011-12-13 10:05:39 UTC (1323770739)
+Initializing network drop monitor service
+Freeing unused kernel memory: 712k freed
+Write protecting the kernel read-only data: 8192k
+Freeing unused kernel memory: 1968k freed
+Freeing unused kernel memory: 704k freed
+input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input0
+Dec 13 12:05:46 localhost [    0.960612] udevd[48]: starting version 175
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+SCSI subsystem initialized
+ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+ehci_hcd 0000:00:1d.7: PCI INT A -> GSI 23 (level, low) -> IRQ 23
+ehci_hcd 0000:00:1d.7: EHCI Host Controller
+ehci_hcd 0000:00:1d.7: new USB bus registered, assigned bus number 1
+ehci_hcd 0000:00:1d.7: using broken periodic workaround
+ehci_hcd 0000:00:1d.7: debug port 1
+ehci_hcd 0000:00:1d.7: irq 23, io mem 0xfdfff000
+uhci_hcd: USB Universal Host Controller Interface driver
+ehci_hcd 0000:00:1d.7: USB 2.0 started, EHCI 1.00
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 8 ports detected
+ata_piix 0000:00:1f.1: PCI INT A -> GSI 18 (level, low) -> IRQ 18
+scsi0 : ata_piix
+scsi1 : ata_piix
+ata1: PATA max UDMA/100 cmd 0x1f0 ctl 0x3f6 bmdma 0xf900 irq 14
+ata2: PATA max UDMA/100 cmd 0x170 ctl 0x376 bmdma 0xf908 irq 15
+ata_piix 0000:00:1f.2: PCI INT B -> GSI 19 (level, low) -> IRQ 19
+ata_piix 0000:00:1f.2: MAP [ P0 P2 P1 P3 ]
+scsi2 : ata_piix
+scsi3 : ata_piix
+ata3: SATA max UDMA/133 cmd 0xf800 ctl 0xf700 bmdma 0xf400 irq 19
+ata4: SATA max UDMA/133 cmd 0xf600 ctl 0xf500 bmdma 0xf408 irq 19
+uhci_hcd 0000:00:1d.0: PCI INT A -> GSI 23 (level, low) -> IRQ 23
+uhci_hcd 0000:00:1d.0: UHCI Host Controller
+uhci_hcd 0000:00:1d.0: new USB bus registered, assigned bus number 2
+uhci_hcd 0000:00:1d.0: irq 23, io base 0x0000ff00
+hub 2-0:1.0: USB hub found
+hub 2-0:1.0: 2 ports detected
+uhci_hcd 0000:00:1d.1: PCI INT B -> GSI 19 (level, low) -> IRQ 19
+uhci_hcd 0000:00:1d.1: UHCI Host Controller
+uhci_hcd 0000:00:1d.1: new USB bus registered, assigned bus number 3
+uhci_hcd 0000:00:1d.1: irq 19, io base 0x0000fe00
+hub 3-0:1.0: USB hub found
+hub 3-0:1.0: 2 ports detected
+uhci_hcd 0000:00:1d.2: PCI INT C -> GSI 18 (level, low) -> IRQ 18
+uhci_hcd 0000:00:1d.2: UHCI Host Controller
+uhci_hcd 0000:00:1d.2: new USB bus registered, assigned bus number 4
+uhci_hcd 0000:00:1d.2: irq 18, io base 0x0000fd00
+hub 4-0:1.0: USB hub found
+hub 4-0:1.0: 2 ports detected
+
+Serious system problem!
+Kernel panic: Stupidity not found.
+System is rebooted after 10 seconds...
+
+
+</div>
+
+</body>
+</html>
