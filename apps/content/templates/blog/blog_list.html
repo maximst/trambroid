@@ -5,12 +5,23 @@
 {% block content %}
 
 {% for row in content %}
+<section>
 <div id="preview-{{ row.id }}" class="fp-list blog-list content-list">
   <div class="blog-list-header content-list-header">
     <a href="{{ row.get_absolute_url }}" title="Go to: {{ row.title }}"><h4>{{ row.title }}</h4></a>
+
+      <div class="blog-author content-author">
+            Posted by
+            {% if row.user.first_name or row.user.last_name %}
+              {{ row.user.get_full_name }}
+            {% else %}
+              {{ row.user.username }}
+            {% endif %}
+            on <time datetime="{{ row.create_time.isoformat }}">{{ row.create_time }}</time>
+      </div>
   </div>
   <div class="blog-list-body content-list-body">
-    {% if user.is_superuser or row.drupal_nid %}
+    {% if 1 or user.is_superuser or row.drupal_nid %}
       {{ row.preview|safe }}
     {% else %}
       {{ row.preview|striptags|linebreaks }}
@@ -53,6 +64,7 @@
       </small>
   </div>
 </div>
+</section>
 {% endfor %}
 
 {% endblock %}

@@ -34,8 +34,8 @@ def udecode(string, coding):
     return string
 
 #BEGIN export users
-all_users = User.objects.all()
-all_users.delete()
+#all_users = User.objects.all()
+#all_users.delete()
 
 cursor.execute('''SELECT
         users.uid,
@@ -55,8 +55,10 @@ cursor.execute('''SELECT
     LEFT OUTER JOIN file_managed ON users.picture = file_managed.fid
     LEFT OUTER JOIN url_alias ON 'blog/' || users.uid = url_alias.source
     WHERE users.status > 0 AND users.uid > 0
-    ORDER BY users.uid''')
-users = cursor.fetchall()
+    ORDER BY users.uid'''
+)
+
+users = [] #cursor.fetchall()
 
 for row in users:
     lname = ''
@@ -106,8 +108,8 @@ for row in users:
 
 
 #BEGIN export content
-all_content = Blog.objects.all()
-all_content.delete()
+#all_content = Blog.objects.all()
+#all_content.delete()
 
 query = '''SELECT
   node.nid,
@@ -134,6 +136,11 @@ result = cursor.fetchall()
 
 def save(result):
     for row in result:
+	blog = Blog.objects.get(drupal_nid=row[0])
+        blog.create_time = datetime.fromtimestamp(row[4])
+        blog.edit_time = datetime.fromtimestamp(row[5])
+        blog.save()
+        continue
         if row[1] not in ('ru', 'en'):
             lang = 'ru'
         else:
@@ -191,7 +198,7 @@ def save(result):
 
 save(result)
 
-
+exit()
 #END export content
 
 #BEGIN export comments

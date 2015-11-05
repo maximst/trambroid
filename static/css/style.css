@@ -327,6 +327,11 @@ textarea {
     -ms-box-shadow: 0 1px 0 #fff;
 }
 
+.content-list-header div.content-author {
+    float: right;
+    margin-top: -2%;
+}
+
 .content-list-body {
     min-height: 70px;
 }
@@ -613,8 +618,20 @@ table.profile-attrs tr td:last-child {
     top: 52px;
 }
 
-ul.linx, ul.linx li {
-    font-size: 0.8em;
-    line-height: 1.5em;
+ul.linx {
+    padding-left: 10px;
+}
+
+ul.linx li {
+    font-size: 0.7em;
+    line-height: 1.7em;
     padding: 3px;
+}
+
+ul.linx li a {
+    color: #9af;
+}
+
+ul.linx li a:hover {
+    color: #47a;
 }

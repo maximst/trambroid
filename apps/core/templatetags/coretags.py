@@ -120,6 +120,7 @@ rupluralize.is_safe = False
 def setlinks(context):
     request = context['request']
     url = request.META.get('PATH_INFO', '')
+    url = url.endswith('/') and url[:-1] or url
     query_string = request.META.get('QUERY_STRING')
     if query_string:
         url += '?%s' % query_string
@@ -141,4 +142,15 @@ def setlinks(context):
     else:
         if result.code == 200:
             return result.read()
+
     return None
+
+
+@register.filter
+@stringfilter
+def replace(value, arg):
+    from_str, to_str = arg.split("'/'")
+    from_str = from_str[1:]
+    to_str = to_str[:-1]
+    return value.replace(from_str, to_str)
+replace.is_safe = False

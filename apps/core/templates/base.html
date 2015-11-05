@@ -7,8 +7,10 @@
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Keywords" content="{% block keywords %}{% endblock %}юмор, статьи, антинаука, хобби, диггерство, диггер, Linux, блог, open, source, философия, ubuntu, фото, отчет, совершенно, секретно, голуби, УИПА, студент, физика, бомбарь, объект, герма, метро, openwrt, роутер">
+<meta name="Description" content="{% block description %}Добро пожаловать в Перпендикулярный Мир, ТРАМБРОИД. Да прибудет с вами глупость! Трамброид сайт о всякой глупости, науке, философии, дигерстве линуксе, Заходи и ты поразишся, что такое может существовать.{% endblock %}">
 <head>
-    <title>TRAMBROID{{ page_title }}</title>
+    <title>{% block title %}TRAMBROID{{ page_title }}{% endblock %}</title>
     <link rel="author" title="Maxim Starodubcev">
     <script type="text/javascript" src="{% get_static_prefix %}js/jquery.js"></script>
     <script type="text/javascript" src="{% get_static_prefix %}js/bootstrap.min.js"></script>
@@ -44,6 +46,7 @@
     <link rel="stylesheet" href="{% get_static_prefix %}css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="{% get_static_prefix %}css/bootstrap-responsive.min.css" type="text/css"/>
     <link rel="stylesheet" href="{% get_static_prefix %}css/style.css" type="text/css"/>
+    <link rel="icon" type="image/ico" href="{% get_static_prefix %}img/favicon.ico" />
 </head>
 
 <body data-offset-top="50">
@@ -64,14 +67,16 @@
           {% endfor %}
         </ul>
       </div>
-      <div class="links left-block">
+      <div class="linx left-block">
         <h5>{% trans "Реклама" %}</h5>
-        <div>
+        <div class="muted">
           {% load linkexchange_tags %}
           {% for link in linkexchange_blocks %}
-            {% if link != '<div></div>' %}{{ link|safe }}{% endif %}
+            {% if link != '<div></div>' and link != '<span></span>' %}{{ link|safe }}{% endif %}
           {% endfor %}
-            <span style="font-size: 10px; padding: 0;">{% setlinks %}</span>
+          <ul class="linx unstyled">
+            <li>{% setlinks %}</li>
+	  </ul>
         </div>
       </div>
       <div class="menu left-block">

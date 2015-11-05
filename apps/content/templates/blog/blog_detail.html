@@ -5,10 +5,18 @@
 {% load i18n %}
 {% load linkexchange_tags %}
 
+{% block keywords %}{% if content.tags.exists %}{% for t in content.get_tags %}{{ t.name }}, {% endfor %}{% endif %}{{ content.title|replace:"' '/', '" }}, {% endblock %}
+
+{% block title %}TRAMBROID | {{ content.title }}{% endblock %}
+
+{% block description %}{{ content.preview|striptags }}{% endblock %}
+
 {% block content %}
     <div class="blog-detail content-detail">
       <div class="blog-detail-header content-detail-header">
-        <h4>{{ content.title }}</h4>
+        <header>
+          <h4>{{ content.title }}</h4>
+        </header>
       </div>
       <div class="blog-detail-body content-detail-body">
         <div class="blog-author content-author">
@@ -18,17 +26,19 @@
             {% else %}
               {{ content.user.username }}
             {% endif %}
-            on {{ content.create_time }}
+            on <time datetime="{{ content.create_time.isoformat }}">{{ content.create_time }}</time>
         </div>
         {% vote %}
         <div class="blog-detail-body-content content-detail-body-content">
-        {% linkexchange_filter request %}
-          {% if user.is_superuser or content.drupal_nid %}
-            {{ content.body|safe }}
-          {% else %}
-            {{ content.body|striptags|linebreaks }}
-          {% endif %}
-        {% endlinkexchange_filter %}
+            <article>
+            {% linkexchange_filter request %}
+              {% if 1 or user.is_superuser or content.drupal_nid %}
+                {{ content.body|safe }}
+              {% else %}
+                {{ content.body|striptags|linebreaks }}
+              {% endif %}
+            {% endlinkexchange_filter %}
+            </article>
         </div>
         <div class="blog-detail-footer content-detail-footer">
           {% if content.tags.exists %}
