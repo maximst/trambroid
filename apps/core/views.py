@@ -48,7 +48,13 @@ def vote(request, app, model, pk, vote):
     except content_model.DoesNotExist:
         raise Http404()
 
-    Vote.objects.record_vote(obj, user, int(vote))
+    vote = int(vote)
+    vote_obj = Vote.objects.get_for_user(obj, user)
+
+    if vote == -1 and vote_obj and vote_obj.vote == 1:
+        vote = 0
+
+    Vote.objects.record_vote(obj, user, vote)
 
     if not redirect_url or reverse('core:login') in redirect_url:
         try:
@@ -68,7 +74,6 @@ def set_language(request, lang=None):
     if lang in dict(settings.LANGUAGES):
         request.session['language'] = lang
 
-    print dict(request.session)
     if request.is_ajax():
         resp = json.dumps({'success': True})
         return HttpResponse(resp, mimetype="application/json")

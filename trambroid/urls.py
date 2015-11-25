@@ -35,7 +35,9 @@ urlpatterns = [
 
     url(r'', include('apps.drupal.urls', namespace='forum')),
 
-    url('', include('social.apps.django_app.urls', namespace='social'))
+    url('', include('social.apps.django_app.urls', namespace='social')),
+
+    url(r'^captcha/(?P<code>[\da-f]{32})/$', 'supercaptcha.draw'),
 ]
 
 if settings.DEBUG:

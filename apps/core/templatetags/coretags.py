@@ -13,6 +13,7 @@ from apps.content.models import Blog
 import re
 import urllib
 import urllib2
+import sqlite3
 
 register = template.Library()
 
@@ -22,7 +23,7 @@ def diff(value, arg):
 
 @register.inclusion_tag('menubar.html', takes_context=True)
 def menubar(context):
-    request = context['request']
+    request = context.get('request')
     sections = []
     for name, title in settings.MENU_ITEMS:
         try:
@@ -30,7 +31,7 @@ def menubar(context):
         except:
             url = '#'
         sections.append({'name': name, 'title': title, 'url': url})
-    lang = request.LANGUAGE_CODE
+    lang = request and request.LANGUAGE_CODE or 'ru'
     for blog in Blog.objects.language(lang).filter(in_menu=True, is_active=True):
         sections.append({'name': blog.name, 'title': blog.title,
                          'url': blog.get_absolute_url()})
@@ -39,7 +40,7 @@ def menubar(context):
     sections_rev.reverse()
     current = None
     for sr in sections_rev:
-        if sr['url'] in request.META['PATH_INFO']:
+        if request and sr['url'] in request.META['PATH_INFO']:
             current = sr
             break
 
@@ -48,7 +49,11 @@ def menubar(context):
 
 @register.inclusion_tag('breadcrump.html', takes_context=True)
 def breadcrump(context):
-    crumps = context['request'].META['PATH_INFO'].split('/')[:-1]
+    request = context.get('request')
+    if request:
+        crumps = request.META['PATH_INFO'].split('/')[:-1]
+    else:
+        crumps = ['/']
 
     urls = map(lambda c: crumps[:crumps.index(c)+1], crumps)
     urls[0].append(u'')
@@ -116,15 +121,52 @@ def rupluralize(value, arg):
     return ''
 rupluralize.is_safe = False
 
+
+@register.simple_tag(takes_context=True)
+def links(context):
+    request = context.get('request')
+    if request:
+        url = request.META.get('PATH_INFO', '')
+        url_list = url.split('://')
+        if len(url_list) > 1:
+            url = '://'.join(url_list[1:])
+
+        if url.startswith('/'):
+            url = u'trambroid.com%s' % url
+
+        query_string = request.META.get('QUERY_STRING')
+        if query_string:
+            url += '?%s' % query_string
+    else:
+        url = u'trambroid.com/'
+
+    quoted_url = urllib.quote(url.encode('utf-8'))
+
+    try:
+        conn = sqlite3.connect(settings.LINKS_DB)
+        sql = conn.cursor()
+        res = sql.execute('SELECT * FROM mainlink WHERE url = ? OR url = ?', (url, quoted_url))
+
+        links = []
+        for link in res:
+            links.append(u'<li>%s</li>' % link[2])
+
+        return u'<ul class="linx unstyled">%s</ul>' % '\n'.join(links)
+    except Exception:
+        return ''
+
+
 @register.simple_tag(takes_context=True)
 def setlinks(context):
-    request = context['request']
-    url = request.META.get('PATH_INFO', '')
-    url = url.endswith('/') and url[:-1] or url
-    query_string = request.META.get('QUERY_STRING')
-    if query_string:
-        url += '?%s' % query_string
-
+    request = context.get('request')
+    if request:
+        url = request.META.get('PATH_INFO', '')
+        url = url.endswith('/') and url[:-1] or url
+        query_string = request.META.get('QUERY_STRING')
+        if query_string:
+            url += '?%s' % query_string
+    else:
+        url = '/'
 
     setlinks_querystring = urllib.urlencode({
         'host': 'trambroid.com',

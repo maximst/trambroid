@@ -1,6 +1,6 @@
 {% load i18n %}
 <div id="vote_block" class="vote-block" title="Score: {{ score.score }} / Votes: {{ score.num_votes }}">
-  <a id="up_vote"{% if not user.is_authenticated %} onclick="return false;"{% endif %} href="{% url "core:vote" app=app model=model pk=pk vote="1" %}" title="Up">
+  <a id="up_vote" href="{% url "core:vote" app=app model=model pk=pk vote="1" %}" title="Up">
     <i class="icon-thumbs-up"></i>
   </a>
 
@@ -8,7 +8,7 @@
     {{ score.score }}
   </div>
 
-  <a id="down_vote"{% if not user.is_authenticated %} onclick="return false;"{% endif %} href="{% url "core:vote" app=app model=model pk=pk vote="-1" %}" title="Down">
+  <a id="down_vote" href="{% url "core:vote" app=app model=model pk=pk vote="-1" %}" title="Down">
     <i class="icon-thumbs-down"></i>
   </a>
 

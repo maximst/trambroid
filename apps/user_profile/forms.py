@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from registration.forms import RegistrationFormUniqueEmail
 
+import supercaptcha
 from pytz import all_timezones
 from PIL import Image
 from StringIO import StringIO
@@ -31,6 +32,8 @@ class ProfileFormMixin(object):
 
 
 class RegistrationForm(ProfileFormMixin, RegistrationFormUniqueEmail):
+#    captcha = supercaptcha.CaptchaField(label=_(u'Введите текст с картинки'))
+
     class Meta:
         model = User
         fields = (

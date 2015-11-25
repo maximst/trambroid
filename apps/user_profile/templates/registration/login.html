@@ -29,7 +29,7 @@
 
 {% trans "Нет акаунта?" %} <a href="{% url "registration_register" %}">{% trans "Регистрация" %}</a>!
 <br />
-<!--{% trans "Или войдите через соцсети" %}: <a href="{% url 'social:begin' 'facebook' %}?{{ redirect_querystring }}" class="facebook" title="Login via facebook">Facebook</a>-->
+{% trans "Или войдите через соцсети" %}: <a href="{% url 'social:begin' 'facebook' %}?next={{ next }}" class="facebook" title="Login via facebook">Facebook</a>
 
 {% endblock %}
 

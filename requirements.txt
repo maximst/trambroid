@@ -13,3 +13,5 @@ django-imagekit
 psycopg2
 django-registration-redux
 LinkExchange.Django
+pyfaceb
+vkontakte

@@ -10,23 +10,27 @@ from forms import CommentForm
 #from apps.core.decorators import ajax_navigation
 
 from taggit.models import Tag
+import os
 
 
-def blog_detail(request, slug, lang='ru', is_drupal=False):
+def blog_detail(request, slug, lang='ru', is_drupal=False, path=None):
     user = request.user
     lang = request.LANGUAGE_CODE
 
     qs = Blog.objects.language('all')
-    query = {'is_active': True}
-    if is_drupal and slug.isdigit():
-        query['drupal_nid'] = int(slug)
+    query = Q(is_active=True)
+    if is_drupal and slug.isdigit() and path:
+        drupal_slug = os.path.join(path, slug)
+        query &= (Q(drupal_nid=int(slug)) | (~Q(drupal_nid=int(slug)) & Q(drupal_slug=drupal_slug)))
+    elif is_drupal and slug.isdigit():
+        query &= Q(drupal_nid=int(slug))
     elif is_drupal:
-        query['drupal_slug'] = slug
+        query &= Q(drupal_slug=slug)
     else:
-        query['slug'] = slug
+        query &= Q(slug=slug)
         qs = Blog.objects.language(lang)
 
-    content = get_object_or_404(qs, **query)
+    content = get_object_or_404(qs, query)
 
     context = {'content': content, 'page_title': ' | %s' % content.title}
     context.update(csrf(request))

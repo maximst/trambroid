@@ -144,6 +144,7 @@ MEDIA_URL = '/media/'
 AUTHENTICATION_BACKENDS = (
     'apps.drupal.auth.DrupalAuthenticate',
     'django.contrib.auth.backends.ModelBackend',
+    'social.backends.facebook.FacebookOAuth2',
 )
 
 STUPIDITY_LEVELS = (
@@ -173,6 +174,8 @@ STATICFILES_FINDERS = (
 
 AUTH_USER_MODEL = 'user_profile.User'
 
+SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
+
 AUTH_USER_EMAIL_UNIQUE = True
 
 DEFAULT_FROM_EMAIL = 'info@trambroid.com'
@@ -195,6 +198,23 @@ QUOTE_REGEX = (
 )
 
 LINKEXCHANGE_CONFIG = os.path.join(BASE_DIR, 'trambroid', 'linkexchange.cfg')
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'apps.user_profile.pipeline.set_user_profile',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+)
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'public_profile']
+
+AVATAR_SIZE = (128, 128)
 
 try:
     from local_settings import *

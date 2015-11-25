@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}500 Server error{% endblock %}
+
+{% block content %}
+<h3>{% trans "Произошла ошибка" %}</h3>
+<br />
+<img src="{% get_static_prefix %}img/trambrobot.jpg" alt="Trambrobot" class="float-left" style="margin: 30px;" />
+{% trans "Зачем ты поломал глупость? Теперь он грустит :-(" %}
+{% endblock %}

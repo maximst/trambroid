@@ -18,7 +18,7 @@ class User(AbstractUser):
     avatar = ProcessedImageField(upload_to='avatars', blank=True,
                                 default=os.path.join(settings.STATIC_URL,
                                                      'img/default_avatar.png'),
-                                processors=[ResizeToFill(128, 128)],
+                                processors=[ResizeToFill(*settings.AVATAR_SIZE)],
                                 format='JPEG',
                                 options={'quality': 60})
     stupidity_level = models.SmallIntegerField(_(u'Уровень глупости'),

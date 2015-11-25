@@ -9,7 +9,7 @@
     {% recursetree forums %}
       <li>
         <div class="comment">
-            <a href="/{{ node.url }}">{{ node.name }}</a>
+            <a href="/{{ node.url }}/">{{ node.name }}</a>
             <br />
             <small>{{ node.description|safe }}
             {% trans "Темы" %}: {{ node.blogs_count }}</small>

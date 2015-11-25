@@ -34,7 +34,7 @@
         <small>
           Tags:
           {% for t in row.get_tags %}
-            <a href="/tag/{{ t.slug }}">{{ t.name }}</a>{% if not forloop.last %}, {% endif %}
+            <a href="/tag/{{ t.slug }}/">{{ t.name }}</a>{% if not forloop.last %}, {% endif %}
           {% endfor %}
         </small>
         </span>
