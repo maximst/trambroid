@@ -16,7 +16,10 @@ def forum(request, path=None, slug=None):
         try:
             forum = Forum.objects.get(url=url)
         except Forum.DoesNotExist:
-	    forum = get_object_or_404(Forum, tid=slug)
+            if slug.isdigit():
+                forum = get_object_or_404(Forum, tid=slug)
+            else:
+                forum = get_object_or_404(Forum, url=url[:-1])
 
         qs = qs.filter(Q(parent=forum)|Q(parent__parent=forum))
 
