@@ -145,6 +145,7 @@ AUTHENTICATION_BACKENDS = (
     'apps.drupal.auth.DrupalAuthenticate',
     'django.contrib.auth.backends.ModelBackend',
     'social.backends.facebook.FacebookOAuth2',
+    'social.backends.vk.VKOAuth2',
 )
 
 STUPIDITY_LEVELS = (
@@ -215,6 +216,8 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'public_profile']
 
 AVATAR_SIZE = (128, 128)
+
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'status']
 
 try:
     from local_settings import *

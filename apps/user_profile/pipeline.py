@@ -49,11 +49,23 @@ def set_user_profile(backend, user, response, uid, *args, **kwargs):
         #user.bdate = date(bdate[2], bdate[0], bdate[1])
         user.save()
 
-#    if user and usa.provider == 'vk-oauth':
-#        vk_api = vkontakte.API(token=usa.extra_data['access_token'])
-#        result = vk_api.users.get(fields='sex,bdate,photo_100,country,city',
-#                                                              uids=usa.uid)
-#        image_url = result[0]['photo_100']
+    if user and backend.name == 'vk-oauth2':
+        vk_api = vkontakte.API(token=response['access_token'])
+        result = vk_api.users.get(fields='sex,bdate,photo_200,personal,country,city,timezone,status',
+                                                                     uids=uid)
+        image_url = result[0]['photo_200']
+        img_temp = NamedTemporaryFile(delete=True)
+        img_temp.write(urlopen(image_url).read())
+
+        img_filename = '%i-%s.png' % (user.id, user.username)
+        user.avatar.save(img_filename, img_temp)
+
+        user.locale = result[0].get('personal', {'langs': 'ru'}).get('langs', 'ru')
+        #user.timezone = result[0].get('timezone', 'Europe/Kiev')
+        user.signature = result[0].get('status', '')
+
+        user.save()
+
 #        img_temp = StringIO(urlopen(image_url).read())
 #        img_temp.flush()
 #

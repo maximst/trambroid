@@ -29,7 +29,10 @@
 
 {% trans "Нет акаунта?" %} <a href="{% url "registration_register" %}">{% trans "Регистрация" %}</a>!
 <br />
-{% trans "Или войдите через соцсети" %}: <a href="{% url 'social:begin' 'facebook' %}?next={{ next }}" class="facebook" title="Login via facebook">Facebook</a>
-
+{% trans "Или войдите через соцсети" %}: 
+<br />
+<a href="{% url 'social:begin' 'facebook' %}?next={{ next }}" class="facebook" title="Login via facebook">Facebook</a>
+<br />
+<a href="{% url 'social:begin' 'vk-oauth2' %}?next={{ next }}" class="vk" title="Login via vk.com">Вконтакте</a>
 {% endblock %}
 
