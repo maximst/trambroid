@@ -30,7 +30,10 @@ def blog_detail(request, slug, lang='ru', is_drupal=False, path=None):
         query &= Q(slug=slug)
         qs = Blog.objects.language(lang)
 
-    content = get_object_or_404(qs, query)
+    try:
+        content = get_object_or_404(qs, query)
+    except Http404:
+        content = get_object_or_404(qs, is_active=True, id=slug)
 
     context = {'content': content, 'page_title': ' | %s' % content.title}
     context.update(csrf(request))
@@ -81,10 +84,7 @@ def blog_list(request, lang=None, drupal_blogs_alias_url=None, drupal_uid=None):
 
 #@ajax_navigation
 def tags(request, tag=None):
-    if request.user.is_authenticated():
-        lang = request.user.language
-    else:
-        lang = 'ru'
+    lang = request.LANGUAGE_CODE
 
     if tag:
         context = Blog.objects.language(lang).filter(tags__slug__in=[tag])\

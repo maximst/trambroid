@@ -11,6 +11,7 @@ from voting.models import Vote
 from apps.content.models import Blog
 
 import re
+import zlib
 import urllib
 import urllib2
 import sqlite3
@@ -140,25 +141,59 @@ def links(context):
     else:
         url = u'trambroid.com/'
 
+    if url.endswith('/'):
+        alt_url = url[:-1]
+    else: 
+        alt_url = '{}/'.format(url)
+
     quoted_url = urllib.quote(url.encode('utf-8'))
+    alt_quoted_url = urllib.quote(alt_url.encode('utf-8'))
 
-    try:
-        conn = sqlite3.connect(settings.LINKS_DB)
-        sql = conn.cursor()
-        res = sql.execute('SELECT * FROM mainlink WHERE url = ? OR url = ?', (url, quoted_url))
+#    print quoted_url
 
-        links = []
-        for link in res:
-            links.append(u'<li>%s</li>' % link[2])
+    conn = sqlite3.connect(settings.LINKS_DB)
+    sql = conn.cursor()
 
-        return u'<ul class="linx unstyled">%s</ul>' % '\n'.join(links)
-    except Exception:
-        return ''
+    links = []
+    for provider in ['mainlink', 'linkfeed']:
+        try:
+            res = sql.execute('SELECT * FROM {} WHERE url = ? OR url = ? OR url = ? OR url = ?'.format(provider), (url, alt_url, quoted_url, alt_quoted_url))
+
+            for link in res:
+                links.append(u'<li>%s</li>' % link[2])
+        except Exception:
+            pass
+
+    return u'<ul class="linx unstyled cached">%s</ul>' % '\n'.join(links)
 
 
 @register.simple_tag(takes_context=True)
 def setlinks(context):
     request = context.get('request')
+
+    full_url = request.build_absolute_uri()
+    crc_uri_1 = str(zlib.crc32(full_url[12:]) % (1<<32))
+    crc_uri_2 = str(zlib.crc32(full_url) % (1<<32))
+
+    qs = urllib.urlencode({
+        'host': 'trambroid.com',
+        'p': '6d6e10342d591fd102032427afb42eca',
+    })
+    setlinks_url = 'http://show.setlinks.ru/?%s' % qs
+
+    def _filter(row):
+        row_list = row.split()
+        return row_list and row_list[0] in (crc_uri_1, crc_uri_2) or False
+
+    try:
+        result = urllib2.urlopen(setlinks_url, timeout=3)
+        result = result.code == 200 and result.readlines() or None
+    except:
+        return None
+    else:
+        res = result and filter(_filter, result) or None
+        return res and res[0].decode('cp1251').replace(res[0].split()[0], '<!--6d6e1-->') or None
+
     if request:
         url = request.META.get('PATH_INFO', '')
         url = url.endswith('/') and url[:-1] or url

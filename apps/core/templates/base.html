@@ -12,6 +12,11 @@
 <head>
     <title>{% block title %}TRAMBROID{{ page_title }}{% endblock %}</title>
     <link rel="author" title="Maxim Starodubcev">
+    <script type="text/javascript">
+        if (window.location.protocol.split(':')[0] == 'http') {
+            window.location.protocol = 'https';
+        }
+    </script>
     <script type="text/javascript" src="{% get_static_prefix %}js/jquery.js"></script>
     <script type="text/javascript" src="{% get_static_prefix %}js/bootstrap.min.js"></script>
 <!--    <script type="text/javascript" src="{% get_static_prefix %}js/ajax.js"></script>-->
@@ -51,6 +56,7 @@
 
 <body data-offset-top="50">
 <!--2A5094D1CB093199E5A114632383F2AC-->
+<!--6d6e1-->
 {% menubar %}
 
 <div class="container-fluid">
