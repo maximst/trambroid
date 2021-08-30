@@ -1,1 +1,1 @@
-django-widgy==0.3.2
+django-widgy==0.9.0
