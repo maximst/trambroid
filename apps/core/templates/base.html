@@ -76,11 +76,12 @@
       <div class="linx left-block">
         <h5>{% trans "Реклама" %}</h5>
         <div class="muted">
+          <!--2A5094D1CB093199E5A114632383F2AC-->
           {% load linkexchange_tags %}
           {% for link in linkexchange_blocks %}
             {% if link != '<div></div>' and link != '<span></span>' %}{{ link|safe }}{% endif %}
           {% endfor %}
-          {% links %}
+          {% links %}<ml_code></ml_code><ml_getver>1.4</ml_getver>
           <ul class="linx unstyled">
             <li>{% setlinks %}</li>
 	  </ul>

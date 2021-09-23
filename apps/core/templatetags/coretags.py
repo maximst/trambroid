@@ -170,6 +170,8 @@ def links(context):
 @register.simple_tag(takes_context=True)
 def setlinks(context):
     request = context.get('request')
+    if not request:
+        return None
 
     full_url = request.build_absolute_uri()
     crc_uri_1 = str(zlib.crc32(full_url[12:]) % (1<<32))

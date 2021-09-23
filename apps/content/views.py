@@ -33,7 +33,10 @@ def blog_detail(request, slug, lang='ru', is_drupal=False, path=None):
     try:
         content = get_object_or_404(qs, query)
     except Http404:
-        content = get_object_or_404(qs, is_active=True, id=slug)
+        if slug.isdigit():
+            content = get_object_or_404(qs, is_active=True, id=slug)
+        else:
+            raise Http404
 
     context = {'content': content, 'page_title': ' | %s' % content.title}
     context.update(csrf(request))
