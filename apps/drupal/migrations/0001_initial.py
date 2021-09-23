@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('tree_id', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('level', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('blogs', models.ManyToManyField(to='content.Blog')),
-                ('parent', models.ForeignKey(related_name='child', blank=True, to='drupal.Forum', null=True)),
+                ('parent', models.ForeignKey(related_name='child', blank=True, to='drupal.Forum', null=True, on_delete=models.DO_NOTHING)),
             ],
         ),
     ]

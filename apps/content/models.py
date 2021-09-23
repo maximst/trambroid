@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from hvad.models import TranslatableModel, TranslatedFields
 from taggit.managers import TaggableManager
@@ -18,7 +18,7 @@ class Blog(TranslatableModel):
     name = models.CharField(max_length=128, unique=True)
     slug = models.SlugField(max_length=128, unique=True)
     is_active = models.BooleanField(default=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.DO_NOTHING)
     front_page = models.BooleanField(default=True)
     on_top = models.BooleanField(default=False)
     create_time = models.DateTimeField(auto_now=False, auto_now_add=True,
@@ -49,15 +49,15 @@ class Blog(TranslatableModel):
 class Comment(models.Model):
     title = models.CharField(max_length=64, blank=True, default='')
     body = models.TextField()
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.DO_NOTHING)
     create_time = models.DateTimeField(auto_now=False, auto_now_add=True,
                                        editable=True)
     edit_time = models.DateTimeField(auto_now=True, auto_now_add=False,
                                      editable=True)
     ip = models.GenericIPAddressField(default='127.0.0.1')
-    blog = models.ForeignKey(Blog)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='child')
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='child', on_delete=models.DO_NOTHING)
     language = models.CharField(max_length=5, default='ru', choices=settings.LANGUAGES)
 
     def __unicode__(self):

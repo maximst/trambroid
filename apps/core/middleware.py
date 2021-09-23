@@ -22,16 +22,24 @@ def log_write(request):
     import os
     os.system('echo "[{}] - {}" >> /tmp/log_tram'.format(datetime.now().ctime(), str(log_row).replace('"', '\"')))
 
-class LanguageMiddleware(object):
+class LanguageMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        response = self.get_response(request)
+
+        return response
+
     def process_view(self, request, view, args, kwargs):
 #        try:
 #            log_write(request)
 #        except:
 #            pass
         user = request.user
-        is_auth = user.is_authenticated()
+        is_auth = user.is_authenticated
         user_lang = is_auth and user.language or settings.LANGUAGE_CODE
-	def_lang = request.session.get('language', user_lang)
+        def_lang = request.session.get('language', user_lang)
         lang = kwargs.get('lang', def_lang) or def_lang
 
         request.LANGUAGE_CODE = lang

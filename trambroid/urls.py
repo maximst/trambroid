@@ -13,10 +13,12 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+from django.urls import path
 from django.conf.urls import include, url
 from django.conf import settings
 from django.contrib import admin
-from django.contrib.auth.views import login
+from django.views import static
+import supercaptcha
 
 from apps.content.views import blog_list
 from apps.core.views import vote, logout, profile
@@ -25,21 +27,20 @@ from apps.core.views import vote, logout, profile
 urlpatterns = [
     url(r'^$', blog_list, name='home'),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    path('admin/', admin.site.urls),
 
-    url(r'', include('apps.content.urls', namespace='content')),
+    path('', include(('apps.content.urls', 'content'), namespace='content')),
 
-    url(r'', include('apps.core.urls', namespace='core')),
+    path('', include(('apps.core.urls', 'core'), namespace='core')),
 
-    url(r'', include('apps.user_profile.urls', namespace='profile')),
+    path('', include(('apps.user_profile.urls', 'user_profile'), namespace='profile')),
 
-    url(r'', include('apps.drupal.urls', namespace='forum')),
+    path('', include(('apps.drupal.urls', 'drupal'), namespace='forum')),
 
-    url('', include('social.apps.django_app.urls', namespace='social')),
+    path('', include(('social.apps.django_app.urls', 'django_app'), namespace='social')),
 
-    url(r'^captcha/(?P<code>[\da-f]{32})/$', 'supercaptcha.draw'),
+    url(r'^captcha/(?P<code>[\da-f]{32})/$', supercaptcha.draw),
 ]
 
 if settings.DEBUG:
-    urlpatterns.append(url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-                       {'document_root': settings.MEDIA_ROOT}))
+    urlpatterns.append(url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT}))

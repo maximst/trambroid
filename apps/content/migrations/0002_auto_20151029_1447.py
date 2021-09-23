@@ -18,12 +18,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='comment',
             name='user',
-            field=models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True),
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True, on_delete=models.DO_NOTHING),
         ),
         migrations.AddField(
             model_name='blogtranslation',
             name='master',
-            field=models.ForeignKey(related_name='translations', editable=False, to='content.Blog', null=True),
+            field=models.ForeignKey(related_name='translations', editable=False, to='content.Blog', null=True, on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='blog',
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='blog',
             name='user',
-            field=models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True),
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True, on_delete=models.DO_NOTHING),
         ),
         migrations.AlterUniqueTogether(
             name='blogtranslation',

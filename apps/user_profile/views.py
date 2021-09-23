@@ -17,7 +17,7 @@ def profile(request, username=None):
     else:
         user = request.user
 
-    can_edit = (user == request.user and user.is_authenticated())
+    can_edit = (user == request.user and user.is_authenticated)
 
     context = {'profile_user': user, 'page_title': ' | %s' % user}
 

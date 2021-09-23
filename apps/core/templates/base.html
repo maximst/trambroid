@@ -1,6 +1,6 @@
+{% load compile_static %}
 {% load static %}
 {% load coretags %}
-{% load coffeescript %}
 {% load i18n %}
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -12,17 +12,17 @@
 <head>
     <title>{% block title %}TRAMBROID{{ page_title }}{% endblock %}</title>
     <link rel="author" title="Maxim Starodubcev">
-    <script type="text/javascript">
+    <!--script type="text/javascript">
         if (window.location.protocol.split(':')[0] == 'http') {
             window.location.protocol = 'https';
         }
-    </script>
+    </script-->
     <script type="text/javascript" src="{% get_static_prefix %}js/jquery.js"></script>
     <script type="text/javascript" src="{% get_static_prefix %}js/bootstrap.min.js"></script>
 <!--    <script type="text/javascript" src="{% get_static_prefix %}js/ajax.js"></script>-->
-    <script type="text/javascript" src="{% get_static_prefix %}{% coffeescript 'coffee/ajax.coffee' %}"></script>
-    <script type="text/javascript" src="{% get_static_prefix %}{% coffeescript 'coffee/comment.coffee' %}"></script>
-    <script type="text/javascript" src="{% get_static_prefix %}{% coffeescript 'coffee/profile.coffee' %}"></script>
+    <script type="text/javascript" src="{% static 'coffee/ajax.coffee'|compile %}"></script>
+    <script type="text/javascript" src="{% static 'coffee/comment.coffee'|compile %}"></script>
+    <script type="text/javascript" src="{% static 'coffee/profile.coffee'|compile %}"></script>
     <script type="text/javascript">
         (function (d, w, c) {
             (w[c] = w[c] || []).push(function() {

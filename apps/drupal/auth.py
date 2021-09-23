@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 
-from functions import check_password
+from .functions import check_password
 
 
 User = get_user_model()
@@ -22,7 +22,6 @@ class DrupalAuthenticate(object):
 
         pwd_valid = check_password(password, user.drupal_password)
         if pwd_valid:
-            print user.password
             if not user.password:
                 user.set_password(password)
                 user.save()

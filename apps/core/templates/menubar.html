@@ -51,7 +51,7 @@
                 </a>
             </li>-->
             <li>
-                <a href="{% url "core:login" %}?next={{ request.META.PATH_INFO }}">
+                <a href="/accounts/login/?next={{ request.META.PATH_INFO }}">
                     {% trans "Login" %}
                 </a>
             </li>

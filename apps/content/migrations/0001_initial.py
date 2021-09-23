@@ -63,8 +63,8 @@ class Migration(migrations.Migration):
                 ('rght', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('tree_id', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('level', models.PositiveIntegerField(editable=False, db_index=True)),
-                ('blog', models.ForeignKey(to='content.Blog')),
-                ('parent', models.ForeignKey(related_name='child', blank=True, to='content.Comment', null=True)),
+                ('blog', models.ForeignKey(to='content.Blog', on_delete=models.CASCADE)),
+                ('parent', models.ForeignKey(related_name='child', blank=True, to='content.Comment', null=True, on_delete=models.DO_NOTHING)),
             ],
         ),
     ]

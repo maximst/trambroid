@@ -49,6 +49,10 @@ body {
     padding-top: 50px;
 }
 
+ml_getver {
+    visibility: hidden;
+}
+
 .navbar {
     box-shadow: 0 3px 20px #000;
     -moz-box-shadow: 0 3px 20px #000;

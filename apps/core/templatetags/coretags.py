@@ -1,8 +1,9 @@
 #-*- coding: utf-8 -*-
 from django import template
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.conf import settings
 from django.core.paginator import Page
+from django.utils import html
 from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string
 from django.template.defaultfilters import stringfilter
@@ -13,7 +14,6 @@ from apps.content.models import Blog
 import re
 import zlib
 import urllib
-import urllib2
 import sqlite3
 
 register = template.Library()
@@ -56,7 +56,7 @@ def breadcrump(context):
     else:
         crumps = ['/']
 
-    urls = map(lambda c: crumps[:crumps.index(c)+1], crumps)
+    urls = list(map(lambda c: crumps[:crumps.index(c)+1], crumps))
     urls[0].append(u'')
 
     titles = ['home'] + crumps[1:]
@@ -146,8 +146,8 @@ def links(context):
     else: 
         alt_url = '{}/'.format(url)
 
-    quoted_url = urllib.quote(url.encode('utf-8'))
-    alt_quoted_url = urllib.quote(alt_url.encode('utf-8'))
+    quoted_url = urllib.parse.quote(url.encode('utf-8'))
+    alt_quoted_url = urllib.parse.quote(alt_url.encode('utf-8'))
 
 #    print quoted_url
 
@@ -164,20 +164,20 @@ def links(context):
         except Exception:
             pass
 
-    return u'<ul class="linx unstyled cached">%s</ul>' % '\n'.join(links)
+    return html.format_html('<ul class="linx unstyled cached">{}</ul>', html.mark_safe('\n'.join(links)))
 
 
 @register.simple_tag(takes_context=True)
 def setlinks(context):
     request = context.get('request')
     if not request:
-        return None
+        return ''
 
     full_url = request.build_absolute_uri()
-    crc_uri_1 = str(zlib.crc32(full_url[12:]) % (1<<32))
-    crc_uri_2 = str(zlib.crc32(full_url) % (1<<32))
+    crc_uri_1 = str(zlib.crc32(full_url[12:].encode()) % (1<<32))
+    crc_uri_2 = str(zlib.crc32(full_url.encode()) % (1<<32))
 
-    qs = urllib.urlencode({
+    qs = urllib.parse.urlencode({
         'host': 'trambroid.com',
         'p': '6d6e10342d591fd102032427afb42eca',
     })
@@ -188,13 +188,13 @@ def setlinks(context):
         return row_list and row_list[0] in (crc_uri_1, crc_uri_2) or False
 
     try:
-        result = urllib2.urlopen(setlinks_url, timeout=3)
+        result = urllib.request.urlopen(setlinks_url, timeout=3)
         result = result.code == 200 and result.readlines() or None
     except:
-        return None
+        return ''
     else:
-        res = result and filter(_filter, result) or None
-        return res and res[0].decode('cp1251').replace(res[0].split()[0], '<!--6d6e1-->') or None
+        res = result and list(filter(_filter, result)) or None
+        return res and res[0].decode('cp1251').replace(res[0].split()[0], '<!--6d6e1-->') or ''
 
     if request:
         url = request.META.get('PATH_INFO', '')
@@ -205,7 +205,7 @@ def setlinks(context):
     else:
         url = '/'
 
-    setlinks_querystring = urllib.urlencode({
+    setlinks_querystring = urllib.parse.urlencode({
         'host': 'trambroid.com',
         'start': '1',
         'count': '20',
@@ -215,14 +215,14 @@ def setlinks(context):
     setlinks_url = 'http://show.setlinks.ru/page.php?%s' % setlinks_querystring
 
     try:
-        result = urllib2.urlopen(setlinks_url, timeout=5)
+        result = urllib.request.urlopen(setlinks_url, timeout=5)
     except:
-        return None
+        return ''
     else:
         if result.code == 200:
             return result.read()
 
-    return None
+    return ''
 
 
 @register.filter

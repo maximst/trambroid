@@ -117,7 +117,7 @@
         </form>
       </div>
     {% else %}
-      {% trans "Пожалуйста" %} <a href="{% url "core:login" %}?next={{ request.META.PATH_INFO }}">{% trans "войдите" %}</a>, {% trans "что-бы оставить коментарий" %}.
+      {% trans "Пожалуйста" %} <a href="/accounts/login/?next={{ request.META.PATH_INFO }}">{% trans "войдите" %}</a>, {% trans "что-бы оставить коментарий" %}.
       <br />
       {% trans "Нет акаунта?" %} <a href="{% url "registration_register" %}?next={{ request.META.PATH_INFO }}">{% trans "Регистрация" %}</a>
     {% endif %}

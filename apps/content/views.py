@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render, get_object_or_404, redirect
-from django.core.context_processors import csrf
+import os
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 from django.db.models import Count, Q
-
-from models import Blog, Comment
-from forms import CommentForm
-#from apps.core.decorators import ajax_navigation
-
+from django.shortcuts import render, get_object_or_404, redirect
+from django.template.context_processors import csrf
 from taggit.models import Tag
-import os
+
+from .models import Blog, Comment
+from .forms import CommentForm
+#from apps.core.decorators import ajax_navigation
 
 
 def blog_detail(request, slug, lang='ru', is_drupal=False, path=None):

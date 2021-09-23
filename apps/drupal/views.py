@@ -23,7 +23,7 @@ def forum(request, path=None, slug=None):
 
         qs = qs.filter(Q(parent=forum)|Q(parent__parent=forum))
 
-    forums = qs.annotate(blogs_count=Count('blogs')).order_by('width', '-name')
+    forums = qs.annotate(blogs_count=Count('blogs')).order_by('weight', '-name')
 
     context = {'parent_forum': forum, 'forums': forums}
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from hvad.admin import TranslatableAdmin
-from models import Blog, Comment
+from .models import Blog, Comment
 
 class BlogAdmin(TranslatableAdmin):
     list_display = ('__unicode__', 'user', 'create_time', 'all_translations',

@@ -1,17 +1,19 @@
-Django
--e git+https://github.com/Marx86/django-voting.git#egg=django-voting
-django-taggit
-django-mptt
+beautifulsoup4==4.10.0
+Django==3.2.7
+-e git+https://github.com/maximst/django-hvad.git#egg=django-hvad
+django-imagekit==4.0.2
+django-mptt==0.13.3
+django-registration-redux==2.9
+django-static-precompiler==2.0
+django-taggit==1.5.1
+django-voting==1.0
+-e git+https://github.com/maximst/LinkExchange.git#egg=LinkExchange
+-e git+https://github.com/maximst/LinkExchange.Django.git#egg=LinkExchange.Django
+Pillow==8.3.2
+psycopg2==2.9.1
+python-facebook-api==0.11.2
+python-social-auth==0.3.6
+social-auth-app-django==5.0.0
 pytz
-Pillow
-django-hvad
-python-social-auth
-django-coffeescript
-BeautifulSoup
--e git+https://github.com/Marx86/supercaptcha.git#egg=supercaptcha
-django-imagekit
-psycopg2
-django-registration-redux
-LinkExchange.Django
-pyfaceb
-vkontakte
+-e git+https://github.com/maximst/supercaptcha.git#egg=supercaptcha
+vkontakte==1.3.5

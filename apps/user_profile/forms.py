@@ -1,16 +1,14 @@
 #-*- coding: utf-8 -*-
+from io import StringIO
 from django import forms
 from django.conf import settings
 from django.core.files import File
 from django.contrib.auth import get_user_model, forms as auth_forms
 from django.utils.translation import ugettext_lazy as _
-
 from registration.forms import RegistrationFormUniqueEmail
-
 import supercaptcha
 from pytz import all_timezones
 from PIL import Image
-from StringIO import StringIO
 
 
 User = get_user_model()

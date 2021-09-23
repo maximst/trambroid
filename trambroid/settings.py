@@ -17,6 +17,7 @@ from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+SITE_ID = 1
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -39,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # TRAMBROID apps
     'apps.core',
@@ -52,19 +54,18 @@ INSTALLED_APPS = (
     'taggit',
     'hvad',
     'social.apps.django_app.default',
-    'coffeescript',
     'mptt',
     'imagekit',
     'registration',
     'linkexchange_django',
+    'static_precompiler',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -83,9 +84,9 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.i18n',
                 'apps.content.context_processors.last_comments',
                 'linkexchange_django.context_processors.linkexchange'
             ],
@@ -164,13 +165,11 @@ DISPLAY_CONTENT_TYPES = (
     'blog',
 )
 
-COFFEESCRIPT_ROOT = os.path.join(BASE_DIR, 'static')
-
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'static_precompiler.finders.StaticPrecompilerFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-    'coffeescript.finders.CoffeescriptFinder',
 )
 
 AUTH_USER_MODEL = 'user_profile.User'
@@ -220,6 +219,6 @@ AVATAR_SIZE = (128, 128)
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'status']
 
 try:
-    from local_settings import *
+    from .local_settings import *
 except:
     print('\033[33;2m File "local_settings.py" not found! \033[0m')

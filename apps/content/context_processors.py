@@ -1,7 +1,8 @@
-from .models import Comment, Blog
-
 from django.db.models import Count
 from hvad.utils import get_translation_aware_manager
+
+from .models import Comment, Blog
+
 
 def last_comments(request):
     lang = request.LANGUAGE_CODE
