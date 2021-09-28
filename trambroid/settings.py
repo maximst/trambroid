@@ -222,3 +222,5 @@ try:
     from .local_settings import *
 except:
     print('\033[33;2m File "local_settings.py" not found! \033[0m')
+
+HVAD = {'AUTOLOAD_TRANSLATIONS': True}

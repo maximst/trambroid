@@ -143,13 +143,11 @@ def links(context):
 
     if url.endswith('/'):
         alt_url = url[:-1]
-    else: 
+    else:
         alt_url = '{}/'.format(url)
 
     quoted_url = urllib.parse.quote(url.encode('utf-8'))
     alt_quoted_url = urllib.parse.quote(alt_url.encode('utf-8'))
-
-#    print quoted_url
 
     conn = sqlite3.connect(settings.LINKS_DB)
     sql = conn.cursor()
@@ -163,7 +161,6 @@ def links(context):
                 links.append(u'<li>%s</li>' % link[2])
         except Exception:
             pass
-
     return html.format_html('<ul class="linx unstyled cached">{}</ul>', html.mark_safe('\n'.join(links)))
 
 
@@ -174,12 +171,13 @@ def setlinks(context):
         return ''
 
     full_url = request.build_absolute_uri()
-    crc_uri_1 = str(zlib.crc32(full_url[12:].encode()) % (1<<32))
-    crc_uri_2 = str(zlib.crc32(full_url.encode()) % (1<<32))
+    crc_uri_1 = str(zlib.crc32(full_url[full_url.startswith('https') and 12 or 11:].encode())).encode()
+    crc_uri_2 = str(zlib.crc32(full_url.encode())).encode()
 
     qs = urllib.parse.urlencode({
         'host': 'trambroid.com',
         'p': '6d6e10342d591fd102032427afb42eca',
+        'k': 'utf-8'
     })
     setlinks_url = 'http://show.setlinks.ru/?%s' % qs
 
@@ -194,7 +192,7 @@ def setlinks(context):
         return ''
     else:
         res = result and list(filter(_filter, result)) or None
-        return res and res[0].decode('cp1251').replace(res[0].split()[0], '<!--6d6e1-->') or ''
+        return res and html.mark_safe(res[0].replace(res[0].split()[0], b'<!--6d6e1-->').decode()) or ''
 
     if request:
         url = request.META.get('PATH_INFO', '')

@@ -7,7 +7,12 @@ import os
 
 
 def forum(request, path=None, slug=None):
-    qs = Forum.objects.all()
+    # Fix for new mptt version
+    root_forum, created = Forum.objects.get_or_create(name='Root', description='Root forum')
+    if created:
+        Forum.objects.filter(parent=None).exclude(id=root_forum.id).update(parent=root_forum)
+
+    qs = Forum.objects.all().exclude(parent=None)
 
     forum = None
     if slug:
