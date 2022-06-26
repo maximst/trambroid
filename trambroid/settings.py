@@ -224,10 +224,6 @@ PARLER_LANGUAGES = {
         {'code': 'ru',},
         {'code': 'en',},
     ),
-    'default': {
-        'fallbacks': ['ru'],
-        'hide_untranslated': False,
-    }
 }
 
 

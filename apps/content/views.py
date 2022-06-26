@@ -40,7 +40,7 @@ def blog_detail(request, slug, lang='ru', is_drupal=False, path=None):
     context = {'content': content, 'page_title': ' | %s' % content.title}
     context.update(csrf(request))
 
-    if request.method == 'POST' and user.is_authenticated():
+    if request.method == 'POST' and user.is_authenticated:
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             ip = request.META.get('REMOTE_ADDR')
@@ -57,7 +57,7 @@ def blog_detail(request, slug, lang='ru', is_drupal=False, path=None):
 def blog_list(request, lang=None, drupal_blogs_alias_url=None, drupal_uid=None):
     lang = request.LANGUAGE_CODE
 
-    blogs = Blog.objects.language(lang).filter(is_active=True, 
+    blogs = Blog.objects.translated(lang).filter(is_active=True, 
         front_page=True).annotate(comment_count=Count('comment', distinct=True),
         tags_count=Count('tags', distinct=True)).order_by('-on_top', '-create_time')
 
