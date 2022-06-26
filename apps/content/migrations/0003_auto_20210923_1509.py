@@ -3,7 +3,7 @@
 from django.db import migrations, models
 import django.db.models.deletion
 import django.db.models.manager
-import hvad.fields
+import parler.fields
 
 
 class Migration(migrations.Migration):
@@ -28,11 +28,11 @@ class Migration(migrations.Migration):
                 ('_plain_manager', django.db.models.manager.Manager()),
             ],
         ),
-        migrations.AddField(
-            model_name='blog',
-            name='_hvad_query',
-            field=hvad.fields.SingleTranslationObject('content.Blog', 'content.blogtranslation'),
-        ),
+        #migrations.AddField(
+            #model_name='blog',
+            #name='_parler_query',
+            #field=parler.fields.SingleTranslationObject('content.Blog', 'content.blogtranslation'),
+        #),
         migrations.AlterField(
             model_name='blog',
             name='drupal_slug',
@@ -53,11 +53,11 @@ class Migration(migrations.Migration):
             name='body',
             field=models.TextField(default=''),
         ),
-        migrations.AlterField(
-            model_name='blogtranslation',
-            name='master',
-            field=hvad.fields.MasterKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='translations', to='content.blog'),
-        ),
+        #migrations.AlterField(
+            #model_name='blogtranslation',
+            #name='master',
+            #field=parler.fields.MasterKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='translations', to='content.blog'),
+        #),
         migrations.AlterField(
             model_name='blogtranslation',
             name='preview',

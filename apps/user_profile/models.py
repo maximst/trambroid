@@ -13,7 +13,6 @@ import os
 
 from trambroid import settings
 
-
 class User(AbstractUser):
     avatar = ProcessedImageField(upload_to='avatars', blank=True,
                                 default=os.path.join(settings.STATIC_URL,
@@ -26,14 +25,18 @@ class User(AbstractUser):
     signature = models.CharField(_(u'Подпись'), max_length=255, blank=True,
                     default=('<img alt="" '
                         'src="http://www.trambroid.com/files/userbar.png" />'))
-    timezone = models.CharField(_(u'Временная зона'), max_length=32,
-            default='Europe/Kiev', choices=zip(all_timezones, all_timezones))
-    language = models.CharField(_(u'Язык'), choices=settings.LANGUAGES,
-                                                    max_length=5, default='ru')
+    timezone = models.CharField(_(u'Временная зона'), max_length=32, default=settings.TIME_ZONE)
+    language = models.CharField(_(u'Язык'), max_length=5, default=settings.LANGUAGE_CODE)
 
     drupal_password = models.TextField(blank=True, null=True)
     drupal_uid = models.IntegerField(blank=True, null=True)
     drupal_blogs_alias_url = models.CharField(max_length=255, null=True, blank=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._meta.get_field('timezone').choices = zip(all_timezones, all_timezones)
+        self._meta.get_field('language').choices = settings.LANGUAGES
+
 
     def __unicode__(self):
         if self.get_full_name():

@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 
-from hvad.models import TranslatableModel, TranslatedFields
+from parler.models import TranslatableModel, TranslatedFields
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItem
 import mptt

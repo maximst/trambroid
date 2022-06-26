@@ -2,7 +2,7 @@
 from django.utils import simplejson as json
 from django.http import HttpResponse
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 
 def ajax_navigation(fn):

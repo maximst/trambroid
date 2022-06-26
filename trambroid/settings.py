@@ -52,13 +52,14 @@ INSTALLED_APPS = (
     # External apps
     'voting',
     'taggit',
-    'hvad',
+    'parler',
     'social.apps.django_app.default',
     'mptt',
     'imagekit',
     'registration',
     'linkexchange_django',
     'static_precompiler',
+    'social_django',
 )
 
 MIDDLEWARE = (
@@ -118,7 +119,7 @@ LANGUAGES = (
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'Europe/Kiev'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -218,9 +219,22 @@ AVATAR_SIZE = (128, 128)
 
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'status']
 
+PARLER_LANGUAGES = {
+    1: (
+        {'code': 'ru',},
+        {'code': 'en',},
+    ),
+    'default': {
+        'fallbacks': ['ru'],
+        'hide_untranslated': False,
+    }
+}
+
+
 try:
     from .local_settings import *
 except:
     print('\033[33;2m File "local_settings.py" not found! \033[0m')
 
-HVAD = {'AUTOLOAD_TRANSLATIONS': True}
+
+PARLER_DEFAULT_LANGUAGE = LANGUAGE_CODE

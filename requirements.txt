@@ -1,6 +1,6 @@
 beautifulsoup4==4.10.0
 Django==3.2.7
--e git+https://github.com/maximst/django-hvad.git#egg=django-hvad
+django-parler==2.3
 django-imagekit==4.0.2
 django-mptt==0.13.3
 django-registration-redux==2.9
