@@ -24,7 +24,7 @@ def homepage(request):
 
 def logout(request):
     redirect_url = request.META.get('HTTP_REFERER')
-    if not redirect_url or reverse('core:login') in redirect_url:
+    if not redirect_url or reverse('auth_login') in redirect_url:
         redirect_url = '/'
     django_logout(request)
     return redirect(redirect_url)
@@ -56,7 +56,7 @@ def vote(request, app, model, pk, vote):
 
     Vote.objects.record_vote(obj, user, vote)
 
-    if not redirect_url or reverse('core:login') in redirect_url:
+    if not redirect_url or reverse('auth_login') in redirect_url:
         try:
             redirect_url = reverse(model, kwargs={'slug': obj.slug})
         except:
