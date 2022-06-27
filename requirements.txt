@@ -9,7 +9,7 @@ django-taggit==1.5.1
 django-voting==1.0
 -e git+https://github.com/maximst/LinkExchange.git#egg=LinkExchange
 -e git+https://github.com/maximst/LinkExchange.Django.git#egg=LinkExchange.Django
-Pillow==8.3.2
+Pillow==9.0.1
 psycopg2==2.9.1
 python-facebook-api==0.11.2
 python-social-auth==0.3.6
